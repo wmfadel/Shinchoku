@@ -32,6 +32,7 @@ dependencies:
 
   # Authentication Third Parties
   google_sign_in: ^5.2.4
+  twitter_login: ^4.0.1
 
   # Remote Content
   dio: ^4.0.4

@@ -11,13 +11,12 @@ class Authentication extends StatelessWidget {
       /// TODO: Customize Page UI
       body: SignInScreen(
         providerConfigs: [
-          /// TODO: Add Fields Customization
           EmailProviderConfiguration(),
           GoogleProviderConfiguration(clientId: Keys.googleClientID),
-
-          /// TODO: Complete Twitter Configuration
           TwitterProviderConfiguration(
-              apiSecretKey: '', apiKey: '', redirectUri: ''),
+              apiKey: Keys.twitterApiKey,
+              apiSecretKey: Keys.twitterApiSecretKey,
+              redirectUri: Keys.twitterRedirectUri),
 
           /// TODO: Add Facebook Configurations to Firebase Console
           /// FacebookProviderConfiguration(clientId: 'clientId'),

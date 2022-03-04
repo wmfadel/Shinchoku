@@ -951,7 +951,7 @@ packages:
     source: hosted
     version: "0.8.0"
   twitter_login:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: twitter_login
       url: "https://pub.dartlang.org"
