@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutterfire_ui/auth.dart';
+import 'package:shinchoku/core/constants/keys.dart';
 
 class Authentication extends StatelessWidget {
   const Authentication({Key? key}) : super(key: key);
@@ -12,9 +13,7 @@ class Authentication extends StatelessWidget {
         providerConfigs: [
           /// TODO: Add Fields Customization
           EmailProviderConfiguration(),
-
-          /// TODO: Complete Google Auth Configuration
-          GoogleProviderConfiguration(clientId: 'clientId'),
+          GoogleProviderConfiguration(clientId: Keys.googleClientID),
 
           /// TODO: Complete Twitter Configuration
           TwitterProviderConfiguration(
