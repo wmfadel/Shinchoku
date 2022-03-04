@@ -12,7 +12,8 @@ class ShinchokuApp extends StatelessWidget {
         designSize: const Size(374, 720),
         builder: () {
           return MaterialApp.router(
-            title: 'Flutter Demo',
+            title: 'Shinchoku',
+            debugShowCheckedModeBanner: false,
             theme: AppTheme.light,
             routeInformationParser: AppRouter.router.routeInformationParser,
             routerDelegate: AppRouter.router.routerDelegate,
