@@ -22,10 +22,11 @@ dependencies:
   # Firebase
   firebase_core: ^1.13.1
   cloud_firestore: ^3.1.10
+  firebase_auth: ^3.3.9
+  flutterfire_ui: ^0.3.5+1
+  firebase_storage: ^10.2.9
   firebase_analytics: ^9.1.2
   firebase_crashlytics: ^2.5.3
-  firebase_auth_oauth: ^1.1.0
-  firebase_storage: ^10.2.9
   firebase_remote_config: ^2.0.2
   firebase_dynamic_links: ^4.0.8
 
@@ -37,7 +38,6 @@ dependencies:
 
   # Utilities
   string_similarity: ^2.0.0
-  background_fetch: ^1.0.3
   url_launcher: ^6.0.20
   cron: ^0.4.0
   flutter_local_notifications: ^9.3.3
@@ -51,6 +51,7 @@ dependencies:
   image_picker: ^0.8.4+10
   flutter_staggered_grid_view: ^0.6.1
   shimmer: ^2.0.0
+  rive: ^0.8.1
 
 dev_dependencies:
   flutter_test:
