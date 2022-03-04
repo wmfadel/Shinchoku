@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "1004514562180",
+    "project_id": "shinchoku-94c9a",
+    "storage_bucket": "shinchoku-94c9a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1004514562180:android:5905077f8e74e1b36872d1",
+        "android_client_info": {
+          "package_name": "com.example.shinchoku"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1004514562180-5artqr42h5p3iutlahjml6lasj1hl2g0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.shinchoku",
+            "certificate_hash": "59d29a67356a98e03017145da5512b8991a4030a"
+          }
+        },
+        {
+          "client_id": "1004514562180-aeilg0lg5us1t4vthek3kfrh2m30ska2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA0GhsowacZyHfKjM7duOT7cVDG5txhP8E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1004514562180-aeilg0lg5us1t4vthek3kfrh2m30ska2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
