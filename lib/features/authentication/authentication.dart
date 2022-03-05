@@ -32,6 +32,8 @@ class Authentication extends StatelessWidget {
 
           /// TODO: Add Facebook Configurations to Firebase Console
           FacebookProviderConfiguration(clientId: 'clientId'),
+
+          /// TODO: Add Apple Configurations to Firebase Console
           AppleProviderConfiguration(),
         ],
       ),
