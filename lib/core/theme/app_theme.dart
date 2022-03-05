@@ -117,6 +117,9 @@ class AppTheme {
         ),
         bottomNavigationBarTheme: BottomNavigationBarThemeData(
           selectedItemColor: _customColorScheme.secondary,
+          backgroundColor: Colors.white,
+          selectedIconTheme: const IconThemeData(color: Colors.white),
+          type: BottomNavigationBarType.shifting,
         ),
         colorScheme: _customColorScheme,
         textTheme: _darkTextTheme,
