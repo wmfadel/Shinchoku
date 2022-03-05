@@ -2,10 +2,10 @@ part of 'home_tabs_bloc.dart';
 
 @immutable
 abstract class HomeTabsEvent {
-  final int index;
-  const HomeTabsEvent(this.index);
+  final HomeTab tab;
+  const HomeTabsEvent(this.tab);
 }
 
 class ChangeHomeTabs extends HomeTabsEvent {
-  const ChangeHomeTabs(int index) : super(index);
+  const ChangeHomeTabs(HomeTab tab) : super(tab);
 }

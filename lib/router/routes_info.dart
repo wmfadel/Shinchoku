@@ -9,22 +9,22 @@ class RoutesInfo {
 
   // Home
   static const homePath = '/home/:tab';
-  static const homeInitialPath = '/home/0';
+  static final homeInitialPath = '/home/${HomeTab.lists.name}';
   static const homeName = 'Home';
 
   /// Home Page tabs
-  /// Using [HomeTabs] enum for the tabs path to ensure consistency
+  /// Using [HomeTab] enum for the tabs path to ensure consistency
   /// in path name while navigating
   // TasksLists
-  static final listsPath = '$homePath/${HomeTabs.lists.name}';
+  static final listsPath = '$homePath/${HomeTab.lists.name}';
   static const listsName = 'Lists';
 
   // Dashboard
-  static final dashboardPath = '$homePath/${HomeTabs.dashboard.name}';
+  static final dashboardPath = '$homePath/${HomeTab.dashboard.name}';
   static const dashboardName = 'Dashboard';
 
   // Collaboration
-  static final collaborationPath = '$homePath/${HomeTabs.collaboration.name}';
+  static final collaborationPath = '$homePath/${HomeTab.collaboration.name}';
   static const collaborationName = 'Collaboration';
 
   // Create Task

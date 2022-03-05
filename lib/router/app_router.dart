@@ -4,8 +4,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shinchoku/core/pages/error_page.dart';
 import 'package:shinchoku/features/authentication/authentication.dart';
+import 'package:shinchoku/features/create_task/create_task.dart';
 import 'package:shinchoku/features/home/home_page.dart';
 import 'package:shinchoku/features/home/tabs_bloc/home_tabs_bloc.dart';
+import 'package:shinchoku/router/home_tabs.dart';
 import 'package:shinchoku/router/routes_info.dart';
 
 class AppRouter {
@@ -45,11 +47,18 @@ class AppRouter {
             path: RoutesInfo.homePath,
             name: RoutesInfo.homeName,
             builder: (BuildContext context, GoRouterState routerState) {
-              final int tabIndex = int.parse(routerState.params['tab']!);
+              final String tabName = routerState.params['tab']!;
               BlocProvider.of<HomeTabsBloc>(context)
-                  .add(ChangeHomeTabs(tabIndex));
+                  .add(ChangeHomeTabs(tabFromName(tabName)));
               return const HomePage();
             }),
+
+        GoRoute(
+          path: RoutesInfo.newTaskPath,
+          name: RoutesInfo.newTaskName,
+          builder: (BuildContext context, GoRouterState routerState) =>
+              const CreateTaskPage(),
+        ),
       ],
       errorBuilder: (BuildContext context, GoRouterState routerState) {
         debugPrint('Router Error: ${routerState.error}');
