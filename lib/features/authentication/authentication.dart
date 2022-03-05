@@ -7,10 +7,22 @@ class Authentication extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
       /// TODO: Customize Page UI
       body: SignInScreen(
-        providerConfigs: [
+        headerBuilder: (BuildContext context, BoxConstraints constraints,
+            double shrinkOffset) {
+          return Padding(
+            padding: const EdgeInsets.all(16),
+            child: FlutterLogo(
+              duration: const Duration(milliseconds: 500),
+              curve: Curves.easeIn,
+              style: FlutterLogoStyle.horizontal,
+              size: constraints.biggest.height,
+            ),
+          );
+        },
+        providerConfigs: const [
           EmailProviderConfiguration(),
           GoogleProviderConfiguration(clientId: Keys.googleClientID),
           TwitterProviderConfiguration(
@@ -19,7 +31,8 @@ class Authentication extends StatelessWidget {
               redirectUri: Keys.twitterRedirectUri),
 
           /// TODO: Add Facebook Configurations to Firebase Console
-          /// FacebookProviderConfiguration(clientId: 'clientId'),
+          FacebookProviderConfiguration(clientId: 'clientId'),
+          AppleProviderConfiguration(),
         ],
       ),
     );

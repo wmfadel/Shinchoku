@@ -1,13 +1,14 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:shinchoku/core/pages/error_page.dart';
 import 'package:shinchoku/features/authentication/authentication.dart';
 import 'package:shinchoku/features/home/home_page.dart';
 import 'package:shinchoku/router/routes_info.dart';
 
 class AppRouter {
   static final GoRouter router = GoRouter(
-      initialLocation: RoutesInfo.authPath,
+      initialLocation: RoutesInfo.homePath,
       redirect: (GoRouterState routerState) {
         debugPrint('REDIRECT: path ${routerState.path}');
         debugPrint('REDIRECT: name ${routerState.name}');
@@ -45,7 +46,6 @@ class AppRouter {
         ),
       ],
       errorBuilder: (BuildContext context, GoRouterState routerState) {
-        /// TODO: Replace with Actual Error Page.
-        return Text(routerState.location + ' Error');
+        return const ErrorPage();
       });
 }

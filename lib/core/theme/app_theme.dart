@@ -29,6 +29,11 @@ class AppTheme {
       fontWeight: FontWeight.w600,
       color: Colors.black,
     ),
+    button: GoogleFonts.montserratAlternates(
+      fontSize: 14.0.sp,
+      fontWeight: FontWeight.w600,
+      color: Colors.white,
+    ),
   );
 
   static final TextTheme _darkTextTheme = TextTheme(
@@ -57,6 +62,11 @@ class AppTheme {
       fontWeight: FontWeight.w600,
       color: Colors.white,
     ),
+    button: GoogleFonts.montserratAlternates(
+      fontSize: 14.sp,
+      fontWeight: FontWeight.w600,
+      color: Colors.white,
+    ),
   );
 
   static const ColorScheme _customColorScheme = ColorScheme(
@@ -65,7 +75,7 @@ class AppTheme {
     surface: Color(0xff61D5A1),
     background: Colors.white,
     error: Color(0xff518099),
-    onPrimary: Colors.red,
+    onPrimary: Colors.white,
     onSecondary: Colors.deepOrange,
     onSurface: Color(0xff61D5A1),
     onBackground: Color(0xffA8EA87),
