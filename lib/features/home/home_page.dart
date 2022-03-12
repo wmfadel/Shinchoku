@@ -7,16 +7,16 @@ import 'package:shinchoku/features/tasks_lists/tasks_lists.dart';
 import 'package:shinchoku/router/home_tabs.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shinchoku/router/routes_info.dart';
+
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
-
-  /// TODO: Handle state with Bloc
   @override
   Widget build(BuildContext context) {
-    BlocProvider.of<HomeTabsBloc>(context, listen: true);
+    final HomeTabsBloc homeTabsBloc =
+        BlocProvider.of<HomeTabsBloc>(context, listen: true);
     return Scaffold(
       body: IndexedStack(
-        index: BlocProvider.of<HomeTabsBloc>(context).homeTabs.index,
+        index: homeTabsBloc.homeTabs.index,
         children: const [
           TasksListsPage(),
           DashboardPage(),
@@ -25,18 +25,19 @@ class HomePage extends StatelessWidget {
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
       floatingActionButton: FloatingActionButton(
-        onPressed: () => context.go(RoutesInfo.newTaskPath),
+        onPressed: () => context.goNamed(
+          RoutesInfo.newTaskName,
+          params: {'tab': homeTabsBloc.homeTabs.name},
+        ),
         child: const Icon(Icons.add_outlined),
       ),
       bottomNavigationBar: NavigationBar(
-
         labelBehavior: NavigationDestinationLabelBehavior.alwaysHide,
         animationDuration: const Duration(seconds: 1),
         onDestinationSelected: (selectedIndex) {
-          BlocProvider.of<HomeTabsBloc>(context)
-              .add(ChangeHomeTabs(HomeTab.values[selectedIndex]));
+          homeTabsBloc.add(ChangeHomeTabs(HomeTab.values[selectedIndex]));
         },
-        selectedIndex: BlocProvider.of<HomeTabsBloc>(context).homeTabs.index,
+        selectedIndex: homeTabsBloc.homeTabs.index,
         backgroundColor: Colors.white,
         height: 72,
         destinations: const [
