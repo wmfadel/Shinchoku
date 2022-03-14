@@ -26,7 +26,7 @@ class HomePage extends StatelessWidget {
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
       floatingActionButton: FloatingActionButton(
         onPressed: () => context.goNamed(
-          RoutesInfo.newTaskName,
+          RoutesInfo.newNoteName,
           params: {'tab': homeTabsBloc.homeTabs.name},
         ),
         child: const Icon(Icons.add_outlined),
