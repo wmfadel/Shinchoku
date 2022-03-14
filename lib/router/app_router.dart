@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shinchoku/core/pages/error_page.dart';
 import 'package:shinchoku/features/authentication/authentication.dart';
-import 'package:shinchoku/features/create_task/create_task.dart';
+import 'package:shinchoku/features/create_note/create_note.dart';
 import 'package:shinchoku/features/home/home_page.dart';
 import 'package:shinchoku/features/home/tabs_bloc/home_tabs_bloc.dart';
 import 'package:shinchoku/router/home_tabs.dart';
@@ -41,16 +41,16 @@ class AppRouter {
             },
             routes: [
               GoRoute(
-                  path: RoutesInfo.newTaskPath,
-                  name: RoutesInfo.newTaskName,
+                  path: RoutesInfo.newNotePath,
+                  name: RoutesInfo.newNoteName,
                   pageBuilder:
                       (BuildContext context, GoRouterState routerState) {
                     _extractHomeTabName(routerState, context);
                     return MaterialPage(
                       key: routerState.pageKey,
-                      child: CreateTaskPage(
+                      child: CreateNotePage(
                         /// `noteId` is nullable String value of the task that
-                        /// will be shown in [CreateTaskPage] for editing the
+                        /// will be shown in [CreateNotePage] for editing the
                         /// task, if not provided the page will be opened in
                         /// create new task mood.
                         noteId: (routerState.extra as String?),
