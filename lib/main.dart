@@ -6,6 +6,9 @@ import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 import 'package:shinchoku/shinchoku_app.dart';
 
+/// TODO: Add Web Firebase Integration
+/// TODO: Revisit Firebase UI, if not customizable implement native Auth
+
 void main() async {
   runZonedGuarded<Future<void>>(() async {
     WidgetsFlutterBinding.ensureInitialized();
@@ -20,9 +23,7 @@ _errorListener() {
   Isolate.current.addErrorListener(RawReceivePort((pair) async {
     final List<dynamic> errorAndStacktrace = pair;
     await FirebaseCrashlytics.instance.recordError(
-      errorAndStacktrace.first,
-      errorAndStacktrace.last,
-      reason: 'From main._errorListener'
-    );
+        errorAndStacktrace.first, errorAndStacktrace.last,
+        reason: 'From main._errorListener');
   }).sendPort);
 }
