@@ -47,8 +47,15 @@ class AppRouter {
                       (BuildContext context, GoRouterState routerState) {
                     _extractHomeTabName(routerState, context);
                     return MaterialPage(
-                        key: routerState.pageKey,
-                        child: const CreateTaskPage());
+                      key: routerState.pageKey,
+                      child: CreateTaskPage(
+                        /// `noteId` is nullable String value of the task that
+                        /// will be shown in [CreateTaskPage] for editing the
+                        /// task, if not provided the page will be opened in
+                        /// create new task mood.
+                        noteId: (routerState.extra as String?),
+                      ),
+                    );
                   }),
             ]),
       ],
