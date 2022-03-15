@@ -10,6 +10,7 @@ import 'package:shinchoku/router/routes_info.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     final HomeTabsBloc homeTabsBloc =
@@ -35,7 +36,8 @@ class HomePage extends StatelessWidget {
         labelBehavior: NavigationDestinationLabelBehavior.alwaysHide,
         animationDuration: const Duration(seconds: 1),
         onDestinationSelected: (selectedIndex) {
-          homeTabsBloc.add(ChangeHomeTabs(HomeTab.values[selectedIndex]));
+          context.goNamed(RoutesInfo.homeName,
+              params: {'tab': HomeTab.values[selectedIndex].name});
         },
         selectedIndex: homeTabsBloc.homeTabs.index,
         backgroundColor: Colors.white,

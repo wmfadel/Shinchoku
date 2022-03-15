@@ -14,7 +14,7 @@ class AppRouter {
   static final GoRouter router = GoRouter(
       initialLocation: RoutesInfo.homeInitialPath,
       urlPathStrategy: UrlPathStrategy.path,
-      redirect: _redirectHandler,
+    //  redirect: _redirectHandler,
       refreshListenable: GoRouterRefreshStream(
         FirebaseAuth.instance.authStateChanges(),
       ),
