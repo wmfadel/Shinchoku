@@ -6,8 +6,7 @@ import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 import 'package:shinchoku/shinchoku_app.dart';
 
-/// TODO: Add Web Firebase Integration
-/// TODO: Revisit Firebase UI, if not customizable implement native Auth
+/// TODO: Add new Auth page
 
 void main() async {
   runZonedGuarded<Future<void>>(() async {
