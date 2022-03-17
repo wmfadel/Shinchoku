@@ -74,7 +74,7 @@ class AppTheme {
     secondary: Color(0xffff844b),
     surface: Color(0xff61D5A1),
     background: Colors.white,
-    error: Color(0xff518099),
+    error: Colors.red,
     onPrimary: Colors.white,
     onSecondary: Colors.deepOrange,
     onSurface: Color(0xff61D5A1),
@@ -84,27 +84,35 @@ class AppTheme {
   );
 
   static ThemeData get light => ThemeData(
-        brightness: Brightness.light,
-        checkboxTheme: CheckboxThemeData(
-          fillColor: MaterialStateColor.resolveWith((states) {
-            return _customColorScheme.primary;
-          }),
+      brightness: Brightness.light,
+      checkboxTheme: CheckboxThemeData(
+        fillColor: MaterialStateColor.resolveWith((states) {
+          return _customColorScheme.primary;
+        }),
+      ),
+      appBarTheme: const AppBarTheme(
+        foregroundColor: Colors.black,
+        backgroundColor: Colors.white,
+      ),
+      floatingActionButtonTheme: FloatingActionButtonThemeData(
+        foregroundColor: Colors.white,
+        backgroundColor: _customColorScheme.secondary,
+      ),
+      bottomNavigationBarTheme: BottomNavigationBarThemeData(
+        selectedItemColor: _customColorScheme.secondary,
+      ),
+      colorScheme: _customColorScheme,
+      textTheme: _lightTextTheme,
+      textButtonTheme: TextButtonThemeData(
+          style: ButtonStyle(
+        textStyle: MaterialStateProperty.all<TextStyle>(
+          TextStyle(
+            color: _customColorScheme.secondary,
+          ),
         ),
-        appBarTheme: const AppBarTheme(
-          foregroundColor: Colors.black,
-          backgroundColor: Colors.white,
-        ),
-        floatingActionButtonTheme: FloatingActionButtonThemeData(
-          foregroundColor: Colors.white,
-          backgroundColor: _customColorScheme.secondary,
-        ),
-        bottomNavigationBarTheme: BottomNavigationBarThemeData(
-          selectedItemColor: _customColorScheme.secondary,
-        ),
-        colorScheme: _customColorScheme,
-        textTheme: _lightTextTheme,
-      );
+      )));
 
+  /// TODO update dark theme with
   static ThemeData get dark => ThemeData(
         brightness: Brightness.dark,
         appBarTheme: AppBarTheme(

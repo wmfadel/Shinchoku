@@ -1,4 +1,6 @@
-class Images{
+import 'dart:math';
+
+class Images {
   Images._();
 
   /// Error Page Images
@@ -7,4 +9,13 @@ class Images{
 
   /// Message Bubbles Images
   static const String messageBubble = 'assets/pics/message_bubble.svg';
+
+  /// Auth Pages
+  static final String authBackground = 'assets/pics/simz/$_randomSimzImage.jpg';
+  static const String authGoogle = 'assets/pics/google.svg';
+  static const String authTwitter = 'assets/pics/twitter.svg';
+  static const String authFacebook = 'assets/pics/facebook.svg';
+
+  static int get _randomSimzImage =>
+      Random(DateTime.now().microsecondsSinceEpoch).nextInt(18);
 }

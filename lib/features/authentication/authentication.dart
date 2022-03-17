@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:shinchoku/core/constants/images.dart';
+import 'package:shinchoku/core/utils/validators.dart';
+import 'package:shinchoku/core/widgets/custom_fom_field.dart';
+import 'package:shinchoku/core/widgets/social_media_button.dart';
+import 'package:shinchoku/features/authentication/widgets/auth_page_blueprint.dart';
 
 /// 1) TODO add auth flow pages
 /// 2) TODO implement email signup
@@ -10,43 +15,83 @@ import 'package:flutter/material.dart';
 
 class Authentication extends StatelessWidget {
   const Authentication({Key? key}) : super(key: key);
+  static final GlobalKey<FormState> _authIntroFormKey = GlobalKey();
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Center(
-        child: Text('AUTH WILL BE HERE'),
+    return Scaffold(
+      body: AuthPagesBlueprint(
+        form: Form(
+            key: _authIntroFormKey,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Hi!',
+                  style: Theme.of(context).textTheme.headline6,
+                ),
+                const SizedBox(height: 15),
+                CustomFormField(
+                  label: 'Email',
+                  textInputAction: TextInputAction.go,
+                  keyboardType: TextInputType.emailAddress,
+                  onChanged: (String? email) {
+                    /// TODO handle text update
+                  },
+                  validate: FormsValidators.validateEmailField,
+                  onSave: (String? email) {
+                    /// TODO handle saving field data
+                  },
+                ),
+                const SizedBox(height: 15),
+                MaterialButton(
+                  onPressed: () {},
+                  color: Theme.of(context).buttonTheme.colorScheme!.secondary,
+                  textColor: Colors.white,
+                  height: 58,
+                  minWidth: double.maxFinite,
+                  elevation: 4,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10)),
+                  child: const Text('Continue'),
+                ),
+                const SizedBox(height: 15),
+                Center(
+                  child: Text(
+                    'or',
+                    style: Theme.of(context).textTheme.bodyText1,
+                  ),
+                ),
+                const SizedBox(height: 15),
+                SocialMediaButton(
+                  image: Images.authGoogle,
+                  platformName: 'Google',
+                  onPressed: () {},
+                ),
+                const SizedBox(height: 15),
+                SocialMediaButton(
+                  image: Images.authTwitter,
+                  platformName: 'Twitter',
+                  onPressed: () {},
+                ),
+                const SizedBox(height: 15),
+                SocialMediaButton(
+                  image: Images.authFacebook,
+                  platformName: 'Facebook',
+                  onPressed: () {},
+                ),
+                const SizedBox(height: 15),
+                Text(
+                  'Forgot your password?',
+                  style: Theme.of(context).textTheme.button!.copyWith(
+                      color:
+                          Theme.of(context).buttonTheme.colorScheme!.secondary),
+                ),
+                const SizedBox(height: 25),
+              ],
+            )),
       ),
-
-
-      // body: SignInScreen(
-      //   headerBuilder: (BuildContext context, BoxConstraints constraints,
-      //       double shrinkOffset) {
-      //     return Padding(
-      //       padding: const EdgeInsets.all(16),
-      //       child: FlutterLogo(
-      //         duration: const Duration(milliseconds: 500),
-      //         curve: Curves.easeIn,
-      //         style: FlutterLogoStyle.horizontal,
-      //         size: constraints.biggest.height,
-      //       ),
-      //     );
-      //   },
-      //   providerConfigs: const [
-      //     EmailProviderConfiguration(),
-      //     GoogleProviderConfiguration(clientId: Keys.googleClientID),
-      //     TwitterProviderConfiguration(
-      //         apiKey: Keys.twitterApiKey,
-      //         apiSecretKey: Keys.twitterApiSecretKey,
-      //         redirectUri: Keys.twitterRedirectUri),
-      //
-      //     /// TODO: Add Facebook Configurations to Firebase Console
-      //     FacebookProviderConfiguration(clientId: 'clientId'),
-      //
-      //     /// TODO: Add Apple Configurations to Firebase Console
-      //     AppleProviderConfiguration(),
-      //   ],
-      // ),
     );
   }
 }
