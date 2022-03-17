@@ -1,5 +1,13 @@
 import 'package:flutter/material.dart';
 
+/// 1) TODO add auth flow pages
+/// 2) TODO implement email signup
+/// 3) TODO implement email login
+/// 4) TODO implement google auth
+/// 5) TODO implement twitter auth
+/// 6) TODO add facebook auth placeholder
+/// 7) TODO add apple auth placeholder
+
 class Authentication extends StatelessWidget {
   const Authentication({Key? key}) : super(key: key);
 
@@ -10,7 +18,7 @@ class Authentication extends StatelessWidget {
         child: Text('AUTH WILL BE HERE'),
       ),
 
-      /// TODO: Customize Page UI
+
       // body: SignInScreen(
       //   headerBuilder: (BuildContext context, BoxConstraints constraints,
       //       double shrinkOffset) {
