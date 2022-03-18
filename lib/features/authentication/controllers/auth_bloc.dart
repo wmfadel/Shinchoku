@@ -1,9 +1,5 @@
-import 'dart:async';
-
-import 'package:bloc/bloc.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:meta/meta.dart';
 import 'package:shinchoku/features/authentication/data/app_user.dart';
 import 'package:shinchoku/features/authentication/services/authentication_service.dart';
 
@@ -24,6 +20,17 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           await autService.checkUserExistsByEmail(email: event.email);
       if (userExists) return emit(AuthOldUser(event.email));
       emit(AuthNewUser(event.email));
+    });
+
+    on<CreateUser>((event, emit) async {
+      emit(AuthLoading());
+      _appUser = await autService.createNewUser(
+          email: event.email, password: event.password, name: event.name);
+      emit(AuthCompleted());
+    });
+
+    on<EditingName>((event, emit) {
+      emit(AuthEditingName(event.name));
     });
   }
 

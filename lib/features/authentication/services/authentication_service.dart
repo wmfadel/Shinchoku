@@ -1,4 +1,3 @@
-import 'package:shinchoku/core/errors/app_error.dart';
 import 'package:shinchoku/features/authentication/data/app_user.dart';
 import 'package:shinchoku/features/authentication/repositories/auth/auth_interface.dart';
 import 'package:shinchoku/features/authentication/repositories/auth/fire_auth.dart';
@@ -14,9 +13,9 @@ class AuthenticationService {
   }
 
   Future<AppUser> createNewUser(
-      {required String email, required String password}) async {
+      {required String email, required String password, String? name}) async {
     AppUser? user = await _authRepository.signupWithEmailAndPassword(
-        email: email, password: password);
+        email: email, password: password, name: name);
     if (user != null) {
       user = await _userRepository.storeUser(user);
     }

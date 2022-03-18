@@ -34,11 +34,14 @@ class AppRouter {
         GoRoute(
           path: RoutesInfo.registerPath,
           name: RoutesInfo.registerName,
-          pageBuilder: (BuildContext context, GoRouterState routerState) =>
-              MaterialPage(
-            key: routerState.pageKey,
-            child: const RegisterPage(),
-          ),
+          pageBuilder: (BuildContext context, GoRouterState routerState) {
+            return MaterialPage(
+              key: routerState.pageKey,
+              child: RegisterPage(
+                email: routerState.queryParams['email'] ?? 'Unkown@email.com',
+              ),
+            );
+          },
         ),
         GoRoute(
           path: RoutesInfo.loginPath,

@@ -2,7 +2,7 @@ import 'package:shinchoku/features/authentication/data/app_user.dart';
 
 abstract class IAuth {
   Future<AppUser?> signupWithEmailAndPassword(
-      {required String email, required String password});
+      {required String email, required String password, String? name});
 
   Future<AppUser?> loginWithEmailAndPassword(
       {required String email, required String password});

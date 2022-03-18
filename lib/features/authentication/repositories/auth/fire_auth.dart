@@ -9,10 +9,12 @@ class FireAuth implements IAuth {
   Future<AppUser?> signupWithEmailAndPassword({
     required String email,
     required String password,
+    String? name,
   }) async {
     try {
       UserCredential credential = await FirebaseAuth.instance
           .createUserWithEmailAndPassword(email: email, password: password);
+      FirebaseAuth.instance.currentUser?.updateDisplayName(name);
       return credential.buildUserModel();
     } on FirebaseAuthException catch (e) {
       throw AuthenticationException(e.message ?? 'Cannot create new user!');

@@ -23,6 +23,12 @@ class AuthOldUser extends AuthState {
   AuthOldUser(this.email);
 }
 
+class AuthEditingName extends AuthState {
+  final String name;
+
+  AuthEditingName(this.name);
+}
+
 class AuthError extends AuthState {
   final String message;
 
