@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shinchoku/core/pages/error_page.dart';
+import 'package:shinchoku/features/authentication/controllers/auth_bloc.dart';
 import 'package:shinchoku/features/authentication/pages/authentication.dart';
 import 'package:shinchoku/features/authentication/pages/login.dart';
 import 'package:shinchoku/features/authentication/pages/register.dart';

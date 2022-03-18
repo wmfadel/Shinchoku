@@ -5,8 +5,6 @@ class AppUser {
   String? image;
   String? phoneNumber;
   bool? isVerified;
-  String? signInMethod;
-  String? providerId;
 
   AppUser(
       {this.id,
@@ -14,9 +12,16 @@ class AppUser {
       required this.email,
       required this.image,
       required this.phoneNumber,
-      required this.isVerified,
-      this.signInMethod,
-      this.providerId});
+      required this.isVerified,});
+
+  AppUser.fromFire(Map<String,dynamic> data){
+    id = data['id'];
+    name = data['name'];
+    email = data['email'];
+    image = data['image'];
+    phoneNumber = data['phoneNumber'];
+    isVerified = data['isVerified'];
+  }
 
   Map<String, dynamic> toJson() {
     return {
@@ -26,8 +31,6 @@ class AppUser {
       'image': image,
       'phoneNumber': phoneNumber,
       'isVerified': isVerified,
-      'signInMethod': signInMethod,
-      'providerId': providerId,
     };
   }
 }

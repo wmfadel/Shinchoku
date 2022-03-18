@@ -10,26 +10,26 @@ class FireUser implements IUser {
         .collection('users')
         .where('email', isEqualTo: email)
         .get();
-    if(snapshot.docs.isEmpty) return null;
-
-    /// TODO: convert snapshot to [AppUser] model
-    /// return snapshot.docs.first.data();
-    return null;
+    if (snapshot.docs.isEmpty) return null;
+    return AppUser.fromFire(snapshot.docs.first.data() as Map<String, dynamic>);
   }
 
   @override
-  Future<AppUser?> getUserById(String uid) {
-    // TODO: implement getUserById
-    throw UnimplementedError();
+  Future<AppUser?> getUserById(String uid) async {
+    DocumentSnapshot snapshot =
+        await FirebaseFirestore.instance.collection('users').doc(uid).get();
+
+    return AppUser.fromFire((snapshot.data()! as Map<String, dynamic>));
   }
 
   @override
   Future<AppUser?> storeUser(AppUser user) async {
     try {
-      DocumentReference doc = await FirebaseFirestore.instance
+      await FirebaseFirestore.instance
           .collection('users')
-          .add(user.toJson());
-      user.id = doc.id;
+          .doc(user.id)
+          .set(user.toJson());
+
       return user;
     } catch (_) {
       throw const ServerException('Cannot save user data on server!');

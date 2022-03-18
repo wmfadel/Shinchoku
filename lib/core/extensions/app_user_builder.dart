@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:shinchoku/features/authentication/data/app_user.dart';
 
-extension AppUserBuilder on UserCredential {
+extension AppUserCredentialBuilder on UserCredential {
   AppUser buildUserModel() {
     final User? fireUser = user;
     return AppUser(
@@ -11,8 +11,24 @@ extension AppUserBuilder on UserCredential {
       image: fireUser?.photoURL,
       phoneNumber: fireUser?.phoneNumber,
       isVerified: fireUser?.emailVerified,
-      providerId: credential?.providerId,
-      signInMethod: credential?.signInMethod,
     );
   }
 }
+
+
+
+extension AppUserBuilder on User {
+  AppUser buildUserModel() {
+
+    return AppUser(
+      id: uid,
+      name: displayName,
+      email: email,
+      image: photoURL,
+      phoneNumber: phoneNumber,
+      isVerified: emailVerified,
+    );
+  }
+}
+
+

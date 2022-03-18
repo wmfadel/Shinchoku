@@ -21,4 +21,8 @@ class AuthenticationService {
     }
     return user!;
   }
+
+  Future<AppUser?> getUSerById(String uid)async{
+    return await _userRepository.getUserById(uid);
+  }
 }
