@@ -10,13 +10,13 @@ import 'package:shinchoku/features/authentication/widgets/auth_page_blueprint.da
 import 'package:shinchoku/router/routes_info.dart';
 import 'package:go_router/go_router.dart';
 
-/// 1) TODO add auth flow pages
-///   1.1) TODO check if user already registered
-///   1.2) TODO redirect new users to register page
-///   1.3) TODO redirect registered users to login/add password page
+/// 1) ✅ add auth flow pages
+///   1.1) ✅ check if user already registered
+///   1.2) ✅ redirect new users to register page
+///   1.3) ✅ redirect registered users to login/add password page
 ///   1.4) ✅ add info to [RoutesInfo] class
-///   1.5) TODO add initial navigation handling
-/// 2) TODO implement email signup
+///   1.5) ✅ add initial navigation handling
+/// 2) ✅ implement email signup
 /// 3) TODO implement email login
 /// 4) TODO implement google auth
 /// 5) TODO implement twitter auth
