@@ -4,11 +4,30 @@ import 'package:shinchoku/core/widgets/custom_fom_field.dart';
 import 'package:shinchoku/core/widgets/shi_image.dart';
 import 'package:shinchoku/features/authentication/widgets/auth_page_blueprint.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
-  static final GlobalKey<FormState> _key = GlobalKey();
-  static final TextEditingController _passwordController =
-      TextEditingController();
+
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  late final GlobalKey<FormState> _loginFormKey;
+  late final TextEditingController _passwordController;
+
+  @override
+  void initState() {
+    super.initState();
+    _loginFormKey = GlobalKey();
+    _passwordController = TextEditingController();
+  }
+
+  @override
+  void dispose() {
+    _passwordController.dispose();
+    _loginFormKey.currentState?.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +35,7 @@ class LoginPage extends StatelessWidget {
       //  resizeToAvoidBottomInset: false,
       body: AuthPagesBlueprint(
         form: Form(
-            key: _key,
+            key: _loginFormKey,
             child: Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,

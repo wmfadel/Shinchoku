@@ -8,23 +8,45 @@ import 'package:shinchoku/core/widgets/shi_image.dart';
 import 'package:shinchoku/features/authentication/controllers/auth_bloc.dart';
 import 'package:shinchoku/features/authentication/widgets/auth_page_blueprint.dart';
 
-class RegisterPage extends StatelessWidget {
+class RegisterPage extends StatefulWidget {
   final String email;
 
   const RegisterPage({required this.email, Key? key}) : super(key: key);
 
-  static final GlobalKey<FormState> _key = GlobalKey();
-  static final TextEditingController _passwordController =
-      TextEditingController();
-  static final TextEditingController _nameController = TextEditingController();
+  @override
+  State<RegisterPage> createState() => _RegisterPageState();
+}
 
+class _RegisterPageState extends State<RegisterPage> {
+  late final GlobalKey<FormState> _registerFormKey;
+
+  late final TextEditingController _passwordController;
+  late final TextEditingController _nameController;
+
+  String get email => widget.email;
+
+  @override
+  void initState() {
+    super.initState();
+    _registerFormKey = GlobalKey();
+    _passwordController = TextEditingController();
+    _nameController = TextEditingController();
+  }
+
+  @override
+  void dispose() {
+   _passwordController.dispose();
+   _nameController.dispose();
+   _registerFormKey.currentState?.dispose();
+    super.dispose();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       //  resizeToAvoidBottomInset: false,
       body: AuthPagesBlueprint(
         form: Form(
-            key: _key,
+            key: _registerFormKey,
             child: SingleChildScrollView(
               child: Column(
                 mainAxisSize: MainAxisSize.min,
@@ -57,7 +79,7 @@ class RegisterPage extends StatelessWidget {
                       ),
                       Expanded(
                         child: Text(
-                          'Looks like you don\'t have an account. Lets create a new account for\n\n $email',
+                          'Looks like you don\'t have an account. Lets create a new account for\n\n ${widget.email}',
                           style: Theme.of(context)
                               .textTheme
                               .bodyText2!
@@ -119,10 +141,11 @@ class RegisterPage extends StatelessWidget {
                         onPressed: state is AuthLoading
                             ? null
                             : () {
-                                bool? isValid = _key.currentState?.validate();
+                                bool? isValid =
+                                    _registerFormKey.currentState?.validate();
                                 if (isValid != true) return;
                                 AuthBloc.get(context).add(CreateUser(
-                                  email: email,
+                                  email: widget.email,
                                   password: _passwordController.text,
                                   name: _nameController.text.trim(),
                                 ));

@@ -22,12 +22,32 @@ import 'package:go_router/go_router.dart';
 /// 5) TODO implement twitter auth
 /// 6) TODO add facebook auth placeholder
 /// 7) TODO add apple auth placeholder
+/// 8) TODO add logout button somewhere for now.
 
-/// TODO: Change to Stateful Widget
-class Authentication extends StatelessWidget {
+class Authentication extends StatefulWidget {
   const Authentication({Key? key}) : super(key: key);
-  static final GlobalKey<FormState> _authIntroFormKey = GlobalKey();
-  static final TextEditingController _emailController = TextEditingController();
+
+  @override
+  State<Authentication> createState() => _AuthenticationState();
+}
+
+class _AuthenticationState extends State<Authentication> {
+  late final GlobalKey<FormState> _authIntroFormKey;
+  late final TextEditingController _emailController;
+
+  @override
+  void initState() {
+    super.initState();
+    _authIntroFormKey = GlobalKey();
+    _emailController = TextEditingController();
+  }
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _authIntroFormKey.currentState?.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
