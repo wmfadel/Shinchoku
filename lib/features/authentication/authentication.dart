@@ -4,11 +4,14 @@ import 'package:shinchoku/core/utils/validators.dart';
 import 'package:shinchoku/core/widgets/custom_fom_field.dart';
 import 'package:shinchoku/core/widgets/social_media_button.dart';
 import 'package:shinchoku/features/authentication/widgets/auth_page_blueprint.dart';
+import 'package:shinchoku/router/routes_info.dart';
 
 /// 1) TODO add auth flow pages
 ///   1.1) TODO check if user already registered
 ///   1.2) TODO redirect new users to register page
 ///   1.3) TODO redirect registered users to login/add password page
+///   1.4) TODO add info to [RoutesInfo] class
+///   1.5) TODO add initial navigation handling
 /// 2) TODO implement email signup
 /// 3) TODO implement email login
 /// 4) TODO implement google auth

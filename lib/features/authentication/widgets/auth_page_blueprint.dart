@@ -47,7 +47,7 @@ class AuthPagesBlueprint extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.end,
               mainAxisSize: MainAxisSize.max,
               children: [
-                FormContainer(child: form),
+                FormContainer(child: form)
               ],
             ),
           ),

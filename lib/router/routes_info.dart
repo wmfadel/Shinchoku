@@ -7,6 +7,14 @@ class RoutesInfo {
   static const authPath = '/auth';
   static const authName = 'Authentication';
 
+  /// Registration
+  static const registerPath = '/auth-register';
+  static const registerName = 'Registration';
+
+  /// Login
+  static const loginPath = '/auth-login';
+  static const loginName = 'Login';
+
   /// '/home/:tab(${HomeTab.values.map((e) => e.name).join('|')})'
   ///
   /// Home: `/:tab(${HomeTab.values.map((e) => e.name).join('|')})` is used to

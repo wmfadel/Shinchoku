@@ -4,6 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shinchoku/core/pages/error_page.dart';
 import 'package:shinchoku/features/authentication/authentication.dart';
+import 'package:shinchoku/features/authentication/login.dart';
+import 'package:shinchoku/features/authentication/register.dart';
 import 'package:shinchoku/features/create_note/create_note.dart';
 import 'package:shinchoku/features/home/home_page.dart';
 import 'package:shinchoku/features/home/tabs_bloc/home_tabs_bloc.dart';
@@ -21,14 +23,35 @@ class AppRouter {
       routes: [
         /// Authentication()
         GoRoute(
-          path: RoutesInfo.authPath,
-          name: RoutesInfo.authName,
-          pageBuilder: (BuildContext context, GoRouterState routerState) =>
-              MaterialPage(
-            key: routerState.pageKey,
-            child: const Authentication(),
-          ),
-        ),
+            path: RoutesInfo.authPath,
+            name: RoutesInfo.authName,
+            pageBuilder: (BuildContext context, GoRouterState routerState) =>
+                MaterialPage(
+                  key: routerState.pageKey,
+                  child: const Authentication(),
+                ),
+            routes: [
+              GoRoute(
+                path: RoutesInfo.registerPath,
+                name: RoutesInfo.registerName,
+                pageBuilder:
+                    (BuildContext context, GoRouterState routerState) =>
+                        MaterialPage(
+                  key: routerState.pageKey,
+                  child: const RegisterPage(),
+                ),
+              ),
+              GoRoute(
+                path: RoutesInfo.loginPath,
+                name: RoutesInfo.loginName,
+                pageBuilder:
+                    (BuildContext context, GoRouterState routerState) =>
+                        MaterialPage(
+                  key: routerState.pageKey,
+                  child: const LoginPage(),
+                ),
+              ),
+            ]),
 
         /// The main page -> Home Page with bottom Navbar
         GoRoute(
@@ -73,16 +96,20 @@ class AppRouter {
 
     /// If User in The App Without logging in, Redirect to Auth.
     if (FirebaseAuth.instance.currentUser == null &&
-        routerState.location != RoutesInfo.authPath) {
+        !_isInAuthFlow(routerState.location)) {
       return RoutesInfo.authPath;
     }
 
     /// If User in Auth Page and he has already logged in, Redirect to Home
     if (FirebaseAuth.instance.currentUser != null &&
-        routerState.location == RoutesInfo.authPath) {
+        _isInAuthFlow(routerState.location)) {
       return RoutesInfo.homeInitialPath;
     }
     return null;
+  }
+
+  static bool _isInAuthFlow(String location) {
+    return location.startsWith(RoutesInfo.authPath);
   }
 
   /// Used to get current [HomeTab] item from path and set it in [HomeTabsBloc]
