@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:shinchoku/core/constants/images.dart';
 import 'package:shinchoku/core/utils/validators.dart';
 import 'package:shinchoku/core/widgets/custom_fom_field.dart';
-import 'package:shinchoku/core/widgets/social_media_button.dart';
+import 'package:shinchoku/features/authentication/widgets/social_media_button.dart';
 import 'package:shinchoku/features/authentication/widgets/auth_page_blueprint.dart';
 import 'package:shinchoku/router/routes_info.dart';
 
