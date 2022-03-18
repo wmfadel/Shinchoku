@@ -23,35 +23,32 @@ class AppRouter {
       routes: [
         /// Authentication()
         GoRoute(
-            path: RoutesInfo.authPath,
-            name: RoutesInfo.authName,
-            pageBuilder: (BuildContext context, GoRouterState routerState) =>
-                MaterialPage(
-                  key: routerState.pageKey,
-                  child: const Authentication(),
-                ),
-            routes: [
-              GoRoute(
-                path: RoutesInfo.registerPath,
-                name: RoutesInfo.registerName,
-                pageBuilder:
-                    (BuildContext context, GoRouterState routerState) =>
-                        MaterialPage(
-                  key: routerState.pageKey,
-                  child: const RegisterPage(),
-                ),
-              ),
-              GoRoute(
-                path: RoutesInfo.loginPath,
-                name: RoutesInfo.loginName,
-                pageBuilder:
-                    (BuildContext context, GoRouterState routerState) =>
-                        MaterialPage(
-                  key: routerState.pageKey,
-                  child: const LoginPage(),
-                ),
-              ),
-            ]),
+          path: RoutesInfo.authPath,
+          name: RoutesInfo.authName,
+          pageBuilder: (BuildContext context, GoRouterState routerState) =>
+              MaterialPage(
+            key: routerState.pageKey,
+            child: const Authentication(),
+          ),
+        ),
+        GoRoute(
+          path: RoutesInfo.registerPath,
+          name: RoutesInfo.registerName,
+          pageBuilder: (BuildContext context, GoRouterState routerState) =>
+              MaterialPage(
+            key: routerState.pageKey,
+            child: const RegisterPage(),
+          ),
+        ),
+        GoRoute(
+          path: RoutesInfo.loginPath,
+          name: RoutesInfo.loginName,
+          pageBuilder: (BuildContext context, GoRouterState routerState) =>
+              MaterialPage(
+            key: routerState.pageKey,
+            child: const LoginPage(),
+          ),
+        ),
 
         /// The main page -> Home Page with bottom Navbar
         GoRoute(

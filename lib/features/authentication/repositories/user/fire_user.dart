@@ -5,9 +5,16 @@ import 'package:shinchoku/features/authentication/repositories/user/user_interfa
 
 class FireUser implements IUser {
   @override
-  Future<AppUser?> getUserByEmail(String email) {
-    // TODO: implement getUserByEmail
-    throw UnimplementedError();
+  Future<AppUser?> getUserByEmail(String email) async {
+    QuerySnapshot snapshot = await FirebaseFirestore.instance
+        .collection('users')
+        .where('email', isEqualTo: email)
+        .get();
+    if(snapshot.docs.isEmpty) return null;
+
+    /// TODO: convert snapshot to [AppUser] model
+    /// return snapshot.docs.first.data();
+    return null;
   }
 
   @override

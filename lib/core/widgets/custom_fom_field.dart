@@ -12,17 +12,19 @@ class CustomFormField extends StatelessWidget {
   final TextInputType keyboardType;
   final bool obscure;
   final int lengthLimit;
+  final bool enabled;
 
   const CustomFormField({
     required this.label,
     required this.validate,
-    required this.onSave,
+    this.onSave,
     this.controller,
     this.onChanged,
     this.textInputAction = TextInputAction.next,
     this.keyboardType = TextInputType.name,
     this.isSecretValue = false,
     this.obscure = true,
+    this.enabled = true,
     this.lengthLimit = 0,
     Key? key,
   }) : super(key: key);
@@ -44,9 +46,9 @@ class CustomFormField extends StatelessWidget {
         hintText: label,
         filled: true,
         fillColor: Colors.white,
+        enabled: enabled,
         labelStyle: const TextStyle(
           color: Colors.black,
-
         ),
         border: OutlineInputBorder(
           borderRadius: const BorderRadius.all(
