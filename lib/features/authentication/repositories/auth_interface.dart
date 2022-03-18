@@ -1,4 +1,4 @@
-import 'package:shinchoku/core/data/app_user.dart';
+import 'package:shinchoku/features/authentication/data/app_user.dart';
 
 abstract class IAuth {
   Future<AppUser?> signupWithEmailAndPassword(

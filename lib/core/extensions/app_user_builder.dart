@@ -1,8 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:shinchoku/core/data/app_user.dart';
+import 'package:shinchoku/features/authentication/data/app_user.dart';
 
 extension AppUserBuilder on UserCredential {
-  AppUser? buildUserModel() {
+  AppUser buildUserModel() {
     final User? fireUser = user;
     return AppUser(
       id: user?.uid,
