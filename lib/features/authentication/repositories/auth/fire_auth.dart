@@ -11,8 +11,7 @@ class FireAuth implements IAuth {
     required String password,
     String? name,
   }) async {
-    try {
-      UserCredential credential = await FirebaseAuth.instance
+    try {await FirebaseAuth.instance
           .createUserWithEmailAndPassword(email: email, password: password);
      await FirebaseAuth.instance.currentUser?.updateDisplayName(name);
      await FirebaseAuth.instance.currentUser?.updatePhotoURL(
@@ -31,7 +30,7 @@ class FireAuth implements IAuth {
     try {
       UserCredential credential = await FirebaseAuth.instance
           .signInWithEmailAndPassword(email: email, password: password);
-      return credential.buildUserModel();
+      return credential.user!.buildUserModel();
     } on FirebaseAuthException catch (e) {
       throw AuthenticationException(e.message ?? 'Cannot login now!');
     }
