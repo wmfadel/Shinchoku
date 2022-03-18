@@ -15,7 +15,7 @@ class FireAuth implements IAuth {
           .createUserWithEmailAndPassword(email: email, password: password);
      await FirebaseAuth.instance.currentUser?.updateDisplayName(name);
      await FirebaseAuth.instance.currentUser?.updatePhotoURL(
-          'https://avatars.dicebear.com/api/avataaars/$name.svg');
+          'https://avatars.dicebear.com/api/avataaars/${name?.replaceAll(' ', '_')??''}.svg');
       return FirebaseAuth.instance.currentUser!.buildUserModel();
     } on FirebaseAuthException catch (e) {
       throw AuthenticationException(e.message ?? 'Cannot create new user!');

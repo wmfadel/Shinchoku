@@ -71,7 +71,7 @@ class _RegisterPageState extends State<RegisterPage> {
                           },
                           builder: (context, state) {
                             final String name =
-                                (state is AuthEditingName) ? state.name : '';
+                                ((state is AuthEditingName) ? state.name : '').replaceAll(' ', '_');
                             return ShiImage(
                                 'https://avatars.dicebear.com/api/avataaars/$name.svg');
                           },
