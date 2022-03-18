@@ -9,7 +9,7 @@ class AppUser {
   String? providerId;
 
   AppUser(
-      {required this.id,
+      {this.id,
       required this.name,
       required this.email,
       required this.image,
@@ -17,4 +17,17 @@ class AppUser {
       required this.isVerified,
       this.signInMethod,
       this.providerId});
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'name': name,
+      'email': email,
+      'image': image,
+      'phoneNumber': phoneNumber,
+      'isVerified': isVerified,
+      'signInMethod': signInMethod,
+      'providerId': providerId,
+    };
+  }
 }
