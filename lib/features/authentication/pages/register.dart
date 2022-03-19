@@ -161,7 +161,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10)),
                         child: state is AuthLoading
-                            ? const ButtonLoading()
+                            ? const ShiLoading()
                             : const Text('Agree and continue'),
                       );
                     },

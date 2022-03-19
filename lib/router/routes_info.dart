@@ -15,6 +15,10 @@ class RoutesInfo {
   static const loginPath = '/auth-login';
   static const loginName = 'Login';
 
+  /// Splash - Initial data loading
+  static const splashPath = '/';
+  static const splashName = 'Splash';
+
   /// '/home/:tab(${HomeTab.values.map((e) => e.name).join('|')})'
   ///
   /// Home: `/:tab(${HomeTab.values.map((e) => e.name).join('|')})` is used to

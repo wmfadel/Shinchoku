@@ -108,7 +108,7 @@ class _AuthenticationState extends State<Authentication> {
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10)),
                       child: state is AuthLoading
-                          ? const ButtonLoading()
+                          ? const ShiLoading()
                           : const Text('Continue'),
                     );
                   },

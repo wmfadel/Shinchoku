@@ -9,18 +9,31 @@ import 'package:shinchoku/features/authentication/pages/register.dart';
 import 'package:shinchoku/features/create_note/create_note.dart';
 import 'package:shinchoku/features/home/controllers/home_tabs_bloc.dart';
 import 'package:shinchoku/features/home/home_page.dart';
+import 'package:shinchoku/features/splash/splah.dart';
 import 'package:shinchoku/router/home_tabs.dart';
 import 'package:shinchoku/router/routes_info.dart';
 
 class AppRouter {
   static final GoRouter router = GoRouter(
-      initialLocation: RoutesInfo.homeInitialPath,
+      initialLocation: RoutesInfo.splashPath,
       urlPathStrategy: UrlPathStrategy.path,
       redirect: _redirectHandler,
       refreshListenable: GoRouterRefreshStream(
         FirebaseAuth.instance.authStateChanges(),
       ),
       routes: [
+        /// Splash
+        GoRoute(
+          path: RoutesInfo.splashPath,
+          name: RoutesInfo.splashName,
+          pageBuilder: (BuildContext context, GoRouterState routerState) {
+            return MaterialPage(
+              key: routerState.pageKey,
+              child: const SplashPage(),
+            );
+          },
+        ),
+
         /// Authentication()
         GoRoute(
           path: RoutesInfo.authPath,
@@ -103,7 +116,7 @@ class AppRouter {
     /// If User in Auth Page and he has already logged in, Redirect to Home
     if (FirebaseAuth.instance.currentUser != null &&
         _isInAuthFlow(routerState.location)) {
-      return RoutesInfo.homeInitialPath;
+      return RoutesInfo.splashPath;
     }
     return null;
   }

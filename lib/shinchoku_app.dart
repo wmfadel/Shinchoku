@@ -21,8 +21,7 @@ class ShinchokuApp extends StatelessWidget {
               providers: [
                 BlocProvider(create: (_) => HomeTabsBloc()),
                 BlocProvider(
-                  create: (_) =>
-                      AuthBloc(AuthenticationService())..add(GetUser()),
+                  create: (_) => AuthBloc(AuthenticationService()),
                 ),
               ],
               child: MaterialApp.router(
