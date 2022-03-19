@@ -11,6 +11,12 @@ class CheckUser implements AuthEvent {
 
 class GetUser implements AuthEvent {}
 
+class LoginUser implements AuthEvent {
+  final String password;
+
+  LoginUser(this.password);
+}
+
 class CreateUser implements AuthEvent {
   final String email, password;
   final String? name;

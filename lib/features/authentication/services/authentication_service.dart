@@ -8,8 +8,8 @@ class AuthenticationService {
   final IAuth _authRepository = FireAuth();
   final IUser _userRepository = FireUser();
 
-  Future<bool> checkUserExistsByEmail({required String email}) async {
-    return await _userRepository.getUserByEmail(email) != null;
+  Future<AppUser?> checkUserExistsByEmail({required String email}) async {
+    return await _userRepository.getUserByEmail(email);
   }
 
   Future<AppUser> createNewUser(
@@ -22,7 +22,17 @@ class AuthenticationService {
     return user!;
   }
 
-  Future<AppUser?> getUSerById(String uid)async{
+  Future<AppUser> loginWithUser(
+      {required String email, required String password}) async {
+    AppUser? user = await _authRepository.loginWithEmailAndPassword(
+        email: email, password: password);
+    if (user != null) {
+      user = await _userRepository.storeUser(user);
+    }
+    return user!;
+  }
+
+  Future<AppUser?> getUSerById(String uid) async {
     return await _userRepository.getUserById(uid);
   }
 }
