@@ -11,5 +11,7 @@ abstract class IAuth {
 
   Future<AppUser?> loginWithTwitter();
 
+  Future<AppUser?> loginWithGithub();
+
   Future<AppUser?> loginWithFacebook();
 }

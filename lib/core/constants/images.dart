@@ -15,6 +15,7 @@ class Images {
   static const String authGoogle = 'assets/pics/google.svg';
   static const String authTwitter = 'assets/pics/twitter.svg';
   static const String authFacebook = 'assets/pics/facebook.svg';
+  static const String authGithub = 'assets/pics/github.svg';
 
   static int get _randomSimzImage =>
       Random(DateTime.now().microsecondsSinceEpoch).nextInt(18);

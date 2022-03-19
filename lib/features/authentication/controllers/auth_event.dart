@@ -25,7 +25,10 @@ class CreateUser implements AuthEvent {
 }
 
 class CreateGoogleUser implements AuthEvent {}
+
 class CreateTwitterUser implements AuthEvent {}
+
+class CreateGithubUser implements AuthEvent {}
 
 class EditingName implements AuthEvent {
   final String name;

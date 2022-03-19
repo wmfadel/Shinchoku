@@ -83,8 +83,15 @@ class FireAuth implements IAuth {
   }
 
   @override
+  Future<AppUser?> loginWithGithub() {
+    // TODO: implement loginWithGithub
+    throw UnimplementedError();
+  }
+
+  @override
   Future<AppUser?> loginWithFacebook() {
     // TODO: implement loginWithFacebook
     throw UnimplementedError();
   }
+
 }

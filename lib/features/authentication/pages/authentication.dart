@@ -177,6 +177,12 @@ class _AuthenticationState extends State<Authentication> {
                 ),
                 const SizedBox(height: 15),
                 SocialMediaButton(
+                  image: Images.authGithub,
+                  platformName: 'Github',
+                  onPressed: () {},
+                ),
+                const SizedBox(height: 15),
+                SocialMediaButton(
                   image: Images.authFacebook,
                   platformName: 'Facebook',
                   onPressed: () {},
