@@ -22,14 +22,10 @@ class AuthenticationService {
     return user!;
   }
 
-  Future<AppUser> loginWithUser(
+  Future<AppUser?> loginWithUser(
       {required String email, required String password}) async {
-    AppUser? user = await _authRepository.loginWithEmailAndPassword(
+    return await _authRepository.loginWithEmailAndPassword(
         email: email, password: password);
-    if (user != null) {
-      user = await _userRepository.storeUser(user);
-    }
-    return user!;
   }
 
   Future<AppUser?> getUSerById(String uid) async {
