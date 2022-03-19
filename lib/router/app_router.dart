@@ -3,13 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shinchoku/core/pages/error_page.dart';
-import 'package:shinchoku/features/authentication/controllers/auth_bloc.dart';
 import 'package:shinchoku/features/authentication/pages/authentication.dart';
 import 'package:shinchoku/features/authentication/pages/login.dart';
 import 'package:shinchoku/features/authentication/pages/register.dart';
 import 'package:shinchoku/features/create_note/create_note.dart';
+import 'package:shinchoku/features/home/controllers/home_tabs_bloc.dart';
 import 'package:shinchoku/features/home/home_page.dart';
-import 'package:shinchoku/features/home/tabs_bloc/home_tabs_bloc.dart';
 import 'package:shinchoku/router/home_tabs.dart';
 import 'package:shinchoku/router/routes_info.dart';
 

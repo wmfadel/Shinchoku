@@ -6,15 +6,16 @@ class AppUser {
   String? phoneNumber;
   bool? isVerified;
 
-  AppUser(
-      {this.id,
-      required this.name,
-      required this.email,
-      required this.image,
-      required this.phoneNumber,
-      required this.isVerified,});
+  AppUser({
+    this.id,
+    required this.name,
+    required this.email,
+    required this.image,
+    required this.phoneNumber,
+    required this.isVerified,
+  });
 
-  AppUser.fromFire(Map<String,dynamic> data){
+  AppUser.fromFire(Map<String, dynamic> data) {
     id = data['id'];
     name = data['name'];
     email = data['email'];
@@ -32,5 +33,10 @@ class AppUser {
       'phoneNumber': phoneNumber,
       'isVerified': isVerified,
     };
+  }
+
+  @override
+  String toString() {
+    return 'AppUser: ' + toJson().toString();
   }
 }

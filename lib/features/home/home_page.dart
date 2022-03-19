@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shinchoku/features/collaboration/collaboration.dart';
 import 'package:shinchoku/features/dashboard/dashboard.dart';
-import 'package:shinchoku/features/home/tabs_bloc/home_tabs_bloc.dart';
+import 'package:shinchoku/features/home/controllers/home_tabs_bloc.dart';
 import 'package:shinchoku/features/tasks_lists/tasks_lists.dart';
 import 'package:shinchoku/router/home_tabs.dart';
 import 'package:go_router/go_router.dart';

@@ -9,11 +9,7 @@ class CheckUser implements AuthEvent {
   CheckUser(this.email);
 }
 
-class GetUser implements AuthEvent {
-  final String uid;
-
-  GetUser(this.uid);
-}
+class GetUser implements AuthEvent {}
 
 class CreateUser implements AuthEvent {
   final String email, password;
