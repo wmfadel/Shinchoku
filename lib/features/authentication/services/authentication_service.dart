@@ -37,6 +37,11 @@ class AuthenticationService {
     AppUser? user= await _authRepository.loginWithGoogle();
     if(user == null) throw const AuthenticationException('Cannot Continue with Google!');
     return await  _userRepository.storeUser(user);
+  }
 
+  Future<AppUser?> loginWithTwitter() async {
+    AppUser? user= await _authRepository.loginWithTwitter();
+    if(user == null) throw const AuthenticationException('Cannot Continue with Twitter!');
+    return await  _userRepository.storeUser(user);
   }
 }

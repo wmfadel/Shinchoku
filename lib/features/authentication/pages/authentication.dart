@@ -148,10 +148,32 @@ class _AuthenticationState extends State<Authentication> {
                   },
                 ),
                 const SizedBox(height: 15),
-                SocialMediaButton(
-                  image: Images.authTwitter,
-                  platformName: 'Twitter',
-                  onPressed: () {},
+                BlocConsumer<AuthBloc, AuthState>(
+                  listener: (context, state) {
+                    if (state is AuthError) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text(state.message),
+                        ),
+                      );
+                    } else if (state is AuthCompleted) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text('Completed'),
+                        ),
+                      );
+                    }
+                  },
+                  builder: (context, state) {
+                    return SocialMediaButton(
+                      image: Images.authTwitter,
+                      platformName: 'Twitter',
+                      onPressed: state is AuthLoading
+                          ? null
+                          : () =>
+                              AuthBloc.get(context).add(CreateTwitterUser()),
+                    );
+                  },
                 ),
                 const SizedBox(height: 15),
                 SocialMediaButton(

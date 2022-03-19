@@ -43,6 +43,17 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       }
     });
 
+    on<CreateTwitterUser>((event, emit) async {
+      emit(AuthLoading());
+      try {
+        _appUser = await autService.loginWithTwitter();
+        if (_appUser == null) emit(AuthError('Cannot Continue with Twitter'));
+        emit(AuthCompleted());
+      } on AuthenticationException catch (e) {
+        emit(AuthError(e.message));
+      }
+    });
+
     on<LoginUser>((event, emit) async {
       emit(AuthLoading());
       _appUser = await autService.loginWithUser(
