@@ -17,7 +17,7 @@ import 'package:go_router/go_router.dart';
 ///   1.4) ✅ add info to [RoutesInfo] class
 ///   1.5) ✅ add initial navigation handling
 /// 2) ✅ implement email signup
-/// 3) TODO implement email login
+/// 3) ✅ implement email login
 /// 4) TODO implement google auth
 /// 5) TODO implement twitter auth
 /// 6) TODO add facebook auth placeholder
@@ -121,10 +121,31 @@ class _AuthenticationState extends State<Authentication> {
                   ),
                 ),
                 const SizedBox(height: 15),
-                SocialMediaButton(
-                  image: Images.authGoogle,
-                  platformName: 'Google',
-                  onPressed: () {},
+                BlocConsumer<AuthBloc, AuthState>(
+                  listener: (context, state) {
+                    if (state is AuthError) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text(state.message),
+                        ),
+                      );
+                    } else if (state is AuthCompleted) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text('Completed'),
+                        ),
+                      );
+                    }
+                  },
+                  builder: (context, state) {
+                    return SocialMediaButton(
+                      image: Images.authGoogle,
+                      platformName: 'Google',
+                      onPressed: state is AuthLoading
+                          ? null
+                          : () => AuthBloc.get(context).add(CreateGoogleUser()),
+                    );
+                  },
                 ),
                 const SizedBox(height: 15),
                 SocialMediaButton(

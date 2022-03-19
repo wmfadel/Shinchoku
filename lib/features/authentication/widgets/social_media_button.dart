@@ -18,6 +18,7 @@ class SocialMediaButton extends StatelessWidget {
     return MaterialButton(
       onPressed: onPressed,
       color: Colors.white,
+      disabledColor: Colors.white,
       height: 58,
       minWidth: double.maxFinite,
       elevation: 4,

@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shinchoku/core/errors/app_error.dart';
 import '../data/app_user.dart';
 import '../services/authentication_service.dart';
 
@@ -29,6 +30,17 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       _appUser = await autService.createNewUser(
           email: event.email, password: event.password, name: event.name);
       emit(AuthCompleted());
+    });
+
+    on<CreateGoogleUser>((event, emit) async {
+      emit(AuthLoading());
+      try {
+        _appUser = await autService.loginWithGoogle();
+        if (_appUser == null) emit(AuthError('Cannot Continue with Google'));
+        emit(AuthCompleted());
+      } on AuthenticationException catch (e) {
+        emit(AuthError(e.message));
+      }
     });
 
     on<LoginUser>((event, emit) async {

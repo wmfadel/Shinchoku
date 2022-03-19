@@ -24,6 +24,8 @@ class CreateUser implements AuthEvent {
   CreateUser({required this.email, required this.password, this.name});
 }
 
+class CreateGoogleUser implements AuthEvent {}
+
 class EditingName implements AuthEvent {
   final String name;
 

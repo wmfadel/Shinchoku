@@ -1,3 +1,4 @@
+import 'package:shinchoku/core/errors/app_error.dart';
 import 'package:shinchoku/features/authentication/data/app_user.dart';
 import 'package:shinchoku/features/authentication/repositories/auth/auth_interface.dart';
 import 'package:shinchoku/features/authentication/repositories/auth/fire_auth.dart';
@@ -30,5 +31,12 @@ class AuthenticationService {
 
   Future<AppUser?> getUSerById(String uid) async {
     return await _userRepository.getUserById(uid);
+  }
+
+  Future<AppUser?> loginWithGoogle() async {
+    AppUser? user= await _authRepository.loginWithGoogle();
+    if(user == null) throw const AuthenticationException('Cannot Continue with Google!');
+    return await  _userRepository.storeUser(user);
+
   }
 }
