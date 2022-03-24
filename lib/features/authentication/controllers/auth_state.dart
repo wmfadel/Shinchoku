@@ -30,5 +30,7 @@ class AuthEditingName extends AuthState {
 class AuthError extends AuthState {
   final String message;
 
-  AuthError(this.message);
+  AuthError(this.message) {
+    Logger().i('AuthError state with message "$message"');
+  }
 }

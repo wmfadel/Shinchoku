@@ -18,8 +18,8 @@ import 'package:go_router/go_router.dart';
 ///   1.5) ✅ add initial navigation handling
 /// 2) ✅ implement email signup
 /// 3) ✅ implement email login
-/// 4) TODO implement google auth
-/// 5) TODO implement twitter auth
+/// 4) ✅ implement google auth
+/// 5) ✅ implement twitter auth
 /// 6) TODO add facebook auth placeholder
 /// 7) TODO add apple auth placeholder
 /// 8) TODO add logout button somewhere for now.
