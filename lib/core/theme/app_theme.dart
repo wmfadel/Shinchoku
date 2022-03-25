@@ -34,6 +34,11 @@ class AppTheme {
       fontWeight: FontWeight.w600,
       color: Colors.white,
     ),
+    overline: GoogleFonts.montserratAlternates(
+      fontSize: 12.0.sp,
+      fontWeight: FontWeight.w600,
+      color: Colors.white,
+    ),
   );
 
   static final TextTheme _darkTextTheme = TextTheme(

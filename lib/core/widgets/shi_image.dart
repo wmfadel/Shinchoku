@@ -8,12 +8,14 @@ class ShiImage extends StatelessWidget {
   final double? height;
   final BoxFit fit;
   final AlignmentGeometry alignment;
+  final Color? color;
 
   const ShiImage(
     this.image, {
     Key? key,
     this.width,
     this.height,
+    this.color,
     this.fit = BoxFit.contain,
     this.alignment = Alignment.center,
   }) : super(key: key);
@@ -31,6 +33,7 @@ class ShiImage extends StatelessWidget {
                 height: height,
                 alignment: alignment,
                 fit: fit,
+                color: color,
               )
             : SvgPicture.asset(
                 image,
@@ -38,6 +41,7 @@ class ShiImage extends StatelessWidget {
                 height: height,
                 alignment: alignment,
                 fit: fit,
+                color: color,
               )
         : _isNetworkImage
             ? CachedNetworkImage(

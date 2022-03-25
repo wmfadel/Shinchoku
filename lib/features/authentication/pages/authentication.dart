@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:shinchoku/core/constants/images.dart';
 import 'package:shinchoku/core/utils/validators.dart';
 import 'package:shinchoku/core/widgets/button_loading.dart';
 import 'package:shinchoku/core/widgets/custom_fom_field.dart';
 import 'package:shinchoku/features/authentication/controllers/auth_bloc.dart';
-import 'package:shinchoku/features/authentication/widgets/social_media_button.dart';
 import 'package:shinchoku/features/authentication/widgets/auth_page_blueprint.dart';
+import 'package:shinchoku/features/authentication/widgets/social_media_button.dart';
 import 'package:shinchoku/router/routes_info.dart';
-import 'package:go_router/go_router.dart';
 
 /// 1) ✅ add auth flow pages
 ///   1.1) ✅ check if user already registered
