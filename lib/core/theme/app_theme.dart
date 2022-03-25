@@ -39,6 +39,11 @@ class AppTheme {
       fontWeight: FontWeight.w600,
       color: Colors.white,
     ),
+    caption: GoogleFonts.montserratAlternates(
+      fontSize: 8.0.sp,
+      fontWeight: FontWeight.w600,
+      color: Colors.white,
+    ),
   );
 
   static final TextTheme _darkTextTheme = TextTheme(

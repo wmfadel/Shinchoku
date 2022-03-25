@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:shinchoku/core/constants/images.dart';
 import 'package:shinchoku/core/enums/dialogs_enum.dart';
 import 'package:shinchoku/core/widgets/shi_image.dart';
-import 'package:go_router/go_router.dart';
 
 extension Dialogs on BuildContext {
   showShiDialog({required DialogType type, required String message}) {
@@ -75,7 +74,7 @@ class ShiDialog extends StatelessWidget {
                   ),
                 ),
                 IconButton(
-                  onPressed: context.pop,
+                  onPressed: Navigator.of(context).pop,
                   icon: const Icon(Icons.close_rounded, color: Colors.white),
                   padding: EdgeInsets.zero,
                   constraints: const BoxConstraints(minWidth: 8, minHeight: 8),

@@ -7,7 +7,10 @@ class AuthInitial extends AuthState {}
 
 class AuthLoading extends AuthState {}
 
-class AuthCompleted extends AuthState {}
+class AuthCompleted extends AuthState {
+  final String userName;
+  AuthCompleted(this.userName);
+}
 
 class AuthNewUser extends AuthState {
   final String email;

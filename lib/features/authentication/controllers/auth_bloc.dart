@@ -12,7 +12,6 @@ part 'auth_event.dart';
 
 part 'auth_state.dart';
 
-/// TODO: Listen to [AuthError] States and Handle them inUI.
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   static AuthBloc get(BuildContext context) =>
       BlocProvider.of<AuthBloc>(context);
@@ -40,7 +39,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         emit(AuthLoading());
         _appUser = await autService.createNewUser(
             email: event.email, password: event.password, name: event.name);
-        emit(AuthCompleted());
+        emit(AuthCompleted(_appUser?.name??''));
       } on AppError catch (e) {
         emit(AuthError(e.message));
       } on Exception catch (_) {
@@ -53,7 +52,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       try {
         _appUser = await autService.loginWithGoogle();
         if (_appUser == null) emit(AuthError('Cannot Continue with Google'));
-        emit(AuthCompleted());
+        emit(AuthCompleted(_appUser?.name??''));
       } on AppError catch (e) {
         emit(AuthError(e.message));
       } on Exception catch (_) {
@@ -66,7 +65,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         emit(AuthLoading());
         _appUser = await autService.loginWithTwitter();
         if (_appUser == null) emit(AuthError('Cannot Continue with Twitter'));
-        emit(AuthCompleted());
+        emit(AuthCompleted(_appUser?.name??''));
       } on AppError catch (e) {
         emit(AuthError(e.message));
       } on Exception catch (_) {
@@ -79,7 +78,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         emit(AuthLoading());
         _appUser = await autService.loginWithUser(
             email: _appUser!.email!, password: event.password);
-        emit(AuthCompleted());
+        emit(AuthCompleted(_appUser?.name??''));
       } on AppError catch (e) {
         emit(AuthError(e.message));
       } on Exception catch (_) {
@@ -98,7 +97,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           emit(AuthLoading());
           _appUser = await autService
               .getUSerById(FirebaseAuth.instance.currentUser!.uid);
-          emit(AuthCompleted());
+          emit(AuthCompleted(_appUser?.name??''));
         }
       } on AppError catch (e) {
         emit(AuthError(e.message));

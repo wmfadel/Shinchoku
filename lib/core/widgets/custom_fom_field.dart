@@ -44,6 +44,9 @@ class CustomFormField extends StatelessWidget {
             ],
       decoration: InputDecoration(
         hintText: label,
+        errorStyle: Theme.of(context).textTheme.caption!.copyWith(
+              color: Colors.red,
+            ),
         filled: true,
         fillColor: Colors.white,
         enabled: enabled,

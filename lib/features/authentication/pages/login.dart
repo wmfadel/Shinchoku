@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shinchoku/core/constants/strings.dart';
+import 'package:shinchoku/core/enums/dialogs_enum.dart';
 import 'package:shinchoku/core/utils/validators.dart';
 import 'package:shinchoku/core/widgets/button_loading.dart';
+import 'package:shinchoku/core/widgets/custom_dialog.dart';
 import 'package:shinchoku/core/widgets/custom_fom_field.dart';
 import 'package:shinchoku/core/widgets/shi_image.dart';
 import 'package:shinchoku/features/authentication/controllers/auth_bloc.dart';
 import 'package:shinchoku/features/authentication/widgets/auth_page_blueprint.dart';
+import 'package:shinchoku/router/routes_info.dart';
+import 'package:go_router/go_router.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -50,12 +55,24 @@ class _LoginPageState extends State<LoginPage> {
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  'Log in',
-                  style: Theme.of(context)
-                      .textTheme
-                      .headline6!
-                      .copyWith(color: Colors.white),
+                Row(
+                  children: [
+                    IconButton(
+                      onPressed: () => context.goNamed(RoutesInfo.authName),
+                      icon: const Icon(
+                        Icons.arrow_back_ios_rounded,
+                        color: Colors.white,
+                        size: 32,
+                      ),
+                    ),
+                    Text(
+                      'Log in',
+                      style: Theme.of(context)
+                          .textTheme
+                          .headline6!
+                          .copyWith(color: Colors.white),
+                    ),
+                  ],
                 ),
                 const SizedBox(height: 15),
                 Row(
@@ -106,7 +123,15 @@ class _LoginPageState extends State<LoginPage> {
                   },
                 ),
                 const SizedBox(height: 15),
-                BlocBuilder<AuthBloc, AuthState>(
+                BlocConsumer<AuthBloc, AuthState>(
+                  listener: (context, state) {
+                    if (state is AuthError) {
+                      context.showShiDialog(
+                        type: DialogType.error,
+                        message: state.message,
+                      );
+                    }
+                  },
                   builder: (context, state) {
                     return MaterialButton(
                       onPressed: state is AuthLoading
@@ -114,7 +139,12 @@ class _LoginPageState extends State<LoginPage> {
                           : () {
                               bool isValid =
                                   _loginFormKey.currentState!.validate();
-                              if (!isValid) return;
+                              if (!isValid) {
+                                context.showShiDialog(
+                                    type: DialogType.info,
+                                    message: Strings.incompleteFormMessage);
+                                return;
+                              }
                               authBloc.add(LoginUser(_passwordController.text));
                             },
                       color:

@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shinchoku/core/constants/images.dart';
+import 'package:shinchoku/core/constants/strings.dart';
+import 'package:shinchoku/core/enums/dialogs_enum.dart';
 import 'package:shinchoku/core/utils/validators.dart';
 import 'package:shinchoku/core/widgets/button_loading.dart';
+import 'package:shinchoku/core/widgets/custom_dialog.dart';
 import 'package:shinchoku/core/widgets/custom_fom_field.dart';
 import 'package:shinchoku/features/authentication/controllers/auth_bloc.dart';
 import 'package:shinchoku/features/authentication/widgets/auth_page_blueprint.dart';
@@ -55,40 +58,50 @@ class _AuthenticationState extends State<Authentication> {
       body: AuthPagesBlueprint(
         form: Form(
             key: _authIntroFormKey,
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Hi!',
-                  style: Theme.of(context).textTheme.headline6,
-                ),
-                const SizedBox(height: 15),
-                BlocBuilder<AuthBloc, AuthState>(
-                  builder: (context, state) {
-                    return CustomFormField(
+            child: BlocConsumer<AuthBloc, AuthState>(
+              listener: (context, state) {
+                if (state is AuthNewUser) {
+                  context.goNamed(
+                    RoutesInfo.registerName,
+                    queryParams: {'email': state.email},
+                  );
+                } else if (state is AuthOldUser) {
+                  context.goNamed(
+                    RoutesInfo.loginName,
+                    queryParams: {'email': state.email},
+                  );
+                } else if (state is AuthError) {
+                  context.showShiDialog(
+                    type: DialogType.error,
+                    message: state.message,
+                  );
+                } else if (state is AuthCompleted) {
+                  context.showShiDialog(
+                    type: DialogType.success,
+                    message: 'Welcome ${state.userName}!',
+                  );
+                }
+              },
+              builder: (context, state) {
+                return Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Hi!',
+                      style: Theme.of(context).textTheme.headline6,
+                    ),
+                    const SizedBox(height: 15),
+                    CustomFormField(
                       label: 'Email',
                       controller: _emailController,
                       enabled: state is! AuthLoading,
                       textInputAction: TextInputAction.go,
                       keyboardType: TextInputType.emailAddress,
                       validate: FormsValidators.validateEmailField,
-                    );
-                  },
-                ),
-                const SizedBox(height: 15),
-                BlocConsumer<AuthBloc, AuthState>(
-                  listener: (context, state) {
-                    if (state is AuthNewUser) {
-                      context.goNamed(RoutesInfo.registerName,
-                          queryParams: {'email': state.email});
-                    } else if (state is AuthOldUser) {
-                      context.goNamed(RoutesInfo.loginName,
-                          queryParams: {'email': state.email});
-                    }
-                  },
-                  builder: (context, state) {
-                    return MaterialButton(
+                    ),
+                    const SizedBox(height: 15),
+                    MaterialButton(
                       onPressed: state is AuthLoading
                           ? null
                           : () async {
@@ -97,6 +110,10 @@ class _AuthenticationState extends State<Authentication> {
                               if (isValid) {
                                 AuthBloc.get(context).add(
                                     CheckUser(_emailController.text.trim()));
+                              }else{
+                                context.showShiDialog(
+                                    type: DialogType.info,
+                                    message: Strings.incompleteFormMessage);
                               }
                             },
                       color:
@@ -110,92 +127,56 @@ class _AuthenticationState extends State<Authentication> {
                       child: state is AuthLoading
                           ? const ShiLoading()
                           : const Text('Continue'),
-                    );
-                  },
-                ),
-                const SizedBox(height: 15),
-                Center(
-                  child: Text(
-                    'or',
-                    style: Theme.of(context).textTheme.bodyText1,
-                  ),
-                ),
-                const SizedBox(height: 15),
-                BlocConsumer<AuthBloc, AuthState>(
-                  listener: (context, state) {
-                    if (state is AuthError) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text(state.message),
-                        ),
-                      );
-                    } else if (state is AuthCompleted) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                          content: Text('Completed'),
-                        ),
-                      );
-                    }
-                  },
-                  builder: (context, state) {
-                    return SocialMediaButton(
+                    ),
+                    const SizedBox(height: 15),
+                    Center(
+                      child: Text(
+                        'or',
+                        style: Theme.of(context).textTheme.bodyText1,
+                      ),
+                    ),
+                    const SizedBox(height: 15),
+                    SocialMediaButton(
                       image: Images.authGoogle,
                       platformName: 'Google',
                       onPressed: state is AuthLoading
                           ? null
                           : () => AuthBloc.get(context).add(CreateGoogleUser()),
-                    );
-                  },
-                ),
-                const SizedBox(height: 15),
-                BlocConsumer<AuthBloc, AuthState>(
-                  listener: (context, state) {
-                    if (state is AuthError) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text(state.message),
-                        ),
-                      );
-                    } else if (state is AuthCompleted) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                          content: Text('Completed'),
-                        ),
-                      );
-                    }
-                  },
-                  builder: (context, state) {
-                    return SocialMediaButton(
+                    ),
+                    const SizedBox(height: 15),
+                    SocialMediaButton(
                       image: Images.authTwitter,
                       platformName: 'Twitter',
                       onPressed: state is AuthLoading
                           ? null
                           : () =>
                               AuthBloc.get(context).add(CreateTwitterUser()),
-                    );
-                  },
-                ),
-                const SizedBox(height: 15),
-                SocialMediaButton(
-                  image: Images.authGithub,
-                  platformName: 'Github',
-                  onPressed: () {},
-                ),
-                const SizedBox(height: 15),
-                SocialMediaButton(
-                  image: Images.authFacebook,
-                  platformName: 'Facebook',
-                  onPressed: () {},
-                ),
-                const SizedBox(height: 15),
-                Text(
-                  'Forgot your password?',
-                  style: Theme.of(context).textTheme.button!.copyWith(
-                      color:
-                          Theme.of(context).buttonTheme.colorScheme!.secondary),
-                ),
-                const SizedBox(height: 25),
-              ],
+                    ),
+                    const SizedBox(height: 15),
+                    SocialMediaButton(
+                      image: Images.authGithub,
+                      platformName: 'Github',
+                      onPressed: state is AuthLoading ? null : () {},
+                    ),
+                    const SizedBox(height: 15),
+                    SocialMediaButton(
+                      image: Images.authFacebook,
+                      platformName: 'Facebook',
+                      onPressed: state is AuthLoading ? null : () {},
+                    ),
+                    const SizedBox(height: 15),
+                    Text(
+                      'Forgot your password?',
+                      style: Theme.of(context).textTheme.button!.copyWith(
+                          color: Theme.of(context)
+                              .buttonTheme
+                              .colorScheme!
+                              .secondary),
+                    ),
+                    const SizedBox(height: 25),
+                  ],
+                );
+              },
             )),
       ),
     );

@@ -1,12 +1,17 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shinchoku/core/constants/strings.dart';
+import 'package:shinchoku/core/enums/dialogs_enum.dart';
 import 'package:shinchoku/core/utils/validators.dart';
 import 'package:shinchoku/core/widgets/button_loading.dart';
+import 'package:shinchoku/core/widgets/custom_dialog.dart';
 import 'package:shinchoku/core/widgets/custom_fom_field.dart';
 import 'package:shinchoku/core/widgets/shi_image.dart';
 import 'package:shinchoku/features/authentication/controllers/auth_bloc.dart';
 import 'package:shinchoku/features/authentication/widgets/auth_page_blueprint.dart';
+import 'package:go_router/go_router.dart';
+import 'package:shinchoku/router/routes_info.dart';
 
 class RegisterPage extends StatefulWidget {
   final String email;
@@ -35,11 +40,12 @@ class _RegisterPageState extends State<RegisterPage> {
 
   @override
   void dispose() {
-   _passwordController.dispose();
-   _nameController.dispose();
-   _registerFormKey.currentState?.dispose();
+    _passwordController.dispose();
+    _nameController.dispose();
+    _registerFormKey.currentState?.dispose();
     super.dispose();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -52,12 +58,24 @@ class _RegisterPageState extends State<RegisterPage> {
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    'Sign up!',
-                    style: Theme.of(context)
-                        .textTheme
-                        .headline6
-                        ?.copyWith(color: Colors.white),
+                  Row(
+                    children: [
+                      IconButton(
+                        onPressed: () => context.goNamed(RoutesInfo.authName),
+                        icon: const Icon(
+                          Icons.arrow_back_ios_rounded,
+                          color: Colors.white,
+                          size: 32,
+                        ),
+                      ),
+                      Text(
+                        'Sign up!',
+                        style: Theme.of(context)
+                            .textTheme
+                            .headline6
+                            ?.copyWith(color: Colors.white),
+                      ),
+                    ],
                   ),
                   const SizedBox(height: 8),
                   Row(
@@ -71,7 +89,8 @@ class _RegisterPageState extends State<RegisterPage> {
                           },
                           builder: (context, state) {
                             final String name =
-                                ((state is AuthEditingName) ? state.name : '').replaceAll(' ', '_');
+                                ((state is AuthEditingName) ? state.name : '')
+                                    .replaceAll(' ', '_');
                             return ShiImage(
                                 'https://avatars.dicebear.com/api/avataaars/$name.svg');
                           },
@@ -143,7 +162,12 @@ class _RegisterPageState extends State<RegisterPage> {
                             : () {
                                 bool? isValid =
                                     _registerFormKey.currentState?.validate();
-                                if (isValid != true) return;
+                                if (isValid != true) {
+                                  context.showShiDialog(
+                                      type: DialogType.info,
+                                      message: Strings.incompleteFormMessage);
+                                  return;
+                                }
                                 AuthBloc.get(context).add(CreateUser(
                                   email: widget.email,
                                   password: _passwordController.text,
