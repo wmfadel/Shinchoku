@@ -110,7 +110,7 @@ class _AuthenticationState extends State<Authentication> {
                               if (isValid) {
                                 AuthBloc.get(context).add(
                                     CheckUser(_emailController.text.trim()));
-                              }else{
+                              } else {
                                 context.showShiDialog(
                                     type: DialogType.info,
                                     message: Strings.incompleteFormMessage);
@@ -156,13 +156,25 @@ class _AuthenticationState extends State<Authentication> {
                     SocialMediaButton(
                       image: Images.authGithub,
                       platformName: 'Github',
-                      onPressed: state is AuthLoading ? null : () {},
+                      onPressed: state is AuthLoading
+                          ? null
+                          : () {
+                              context.showShiDialog(
+                                  type: DialogType.warning,
+                                  message: Strings.providerNotImplemented);
+                            },
                     ),
                     const SizedBox(height: 15),
                     SocialMediaButton(
                       image: Images.authFacebook,
                       platformName: 'Facebook',
-                      onPressed: state is AuthLoading ? null : () {},
+                      onPressed: state is AuthLoading
+                          ? null
+                          : () {
+                              context.showShiDialog(
+                                  type: DialogType.warning,
+                                  message: Strings.providerNotImplemented);
+                            },
                     ),
                     const SizedBox(height: 15),
                     Text(
