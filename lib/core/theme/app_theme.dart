@@ -1,46 +1,45 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class AppTheme {
   static final TextTheme _lightTextTheme = TextTheme(
     bodyText1: GoogleFonts.montserratAlternates(
-      fontSize: 14.0.sp,
+      fontSize: 14.0,
       fontWeight: FontWeight.w700,
       color: Colors.black,
     ),
     headline1: GoogleFonts.montserratAlternates(
-      fontSize: 32.0.sp,
+      fontSize: 32.0,
       fontWeight: FontWeight.bold,
       color: Colors.black,
     ),
     headline2: GoogleFonts.montserratAlternates(
-      fontSize: 21.0.sp,
+      fontSize: 21.0,
       fontWeight: FontWeight.w700,
       color: Colors.black,
     ),
     headline3: GoogleFonts.montserratAlternates(
-      fontSize: 16.0.sp,
+      fontSize: 16.0,
       fontWeight: FontWeight.w600,
       color: Colors.black,
     ),
     headline6: GoogleFonts.montserratAlternates(
-      fontSize: 20.0.sp,
+      fontSize: 20.0,
       fontWeight: FontWeight.w600,
       color: Colors.black,
     ),
     button: GoogleFonts.montserratAlternates(
-      fontSize: 14.0.sp,
+      fontSize: 14.0,
       fontWeight: FontWeight.w600,
       color: Colors.white,
     ),
     overline: GoogleFonts.montserratAlternates(
-      fontSize: 12.0.sp,
+      fontSize: 12.0,
       fontWeight: FontWeight.w600,
       color: Colors.white,
     ),
     caption: GoogleFonts.montserratAlternates(
-      fontSize: 8.0.sp,
+      fontSize: 8.0,
       fontWeight: FontWeight.w600,
       color: Colors.white,
     ),
@@ -48,32 +47,32 @@ class AppTheme {
 
   static final TextTheme _darkTextTheme = TextTheme(
     bodyText1: GoogleFonts.montserratAlternates(
-      fontSize: 14.0.sp,
+      fontSize: 14.0,
       fontWeight: FontWeight.w700,
       color: Colors.white,
     ),
     headline1: GoogleFonts.montserratAlternates(
-      fontSize: 32.0.sp,
+      fontSize: 32.0,
       fontWeight: FontWeight.bold,
       color: Colors.white,
     ),
     headline2: GoogleFonts.montserratAlternates(
-      fontSize: 21.0.sp,
+      fontSize: 21.0,
       fontWeight: FontWeight.w700,
       color: Colors.white,
     ),
     headline3: GoogleFonts.montserratAlternates(
-      fontSize: 16.0.sp,
+      fontSize: 16.0,
       fontWeight: FontWeight.w600,
       color: Colors.white,
     ),
     headline6: GoogleFonts.montserratAlternates(
-      fontSize: 20.0.sp,
+      fontSize: 20.0,
       fontWeight: FontWeight.w600,
       color: Colors.white,
     ),
     button: GoogleFonts.montserratAlternates(
-      fontSize: 14.sp,
+      fontSize: 14,
       fontWeight: FontWeight.w600,
       color: Colors.white,
     ),

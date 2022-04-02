@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:logger/logger.dart';
 import 'package:shinchoku/core/pages/error_page.dart';
 import 'package:shinchoku/features/authentication/pages/authentication.dart';
 import 'package:shinchoku/features/authentication/pages/login.dart';
@@ -14,6 +15,7 @@ import 'package:shinchoku/router/home_tabs.dart';
 import 'package:shinchoku/router/routes_info.dart';
 
 class AppRouter {
+  static final Logger _log = Logger();
   static final GoRouter router = GoRouter(
       initialLocation: RoutesInfo.splashPath,
       urlPathStrategy: UrlPathStrategy.path,
@@ -27,6 +29,7 @@ class AppRouter {
           path: RoutesInfo.splashPath,
           name: RoutesInfo.splashName,
           pageBuilder: (BuildContext context, GoRouterState routerState) {
+            _log.i('Building ${RoutesInfo.splashName}: ${routerState.report}');
             return MaterialPage(
               key: routerState.pageKey,
               child: const SplashPage(),
@@ -38,16 +41,21 @@ class AppRouter {
         GoRoute(
           path: RoutesInfo.authPath,
           name: RoutesInfo.authName,
-          pageBuilder: (BuildContext context, GoRouterState routerState) =>
-              MaterialPage(
-            key: routerState.pageKey,
-            child: const Authentication(),
-          ),
+          pageBuilder: (BuildContext context, GoRouterState routerState) {
+            _log.i(
+                'Building ${RoutesInfo.registerName}: ${routerState.report}');
+            return MaterialPage(
+              key: routerState.pageKey,
+              child: const Authentication(),
+            );
+          },
         ),
         GoRoute(
           path: RoutesInfo.registerPath,
           name: RoutesInfo.registerName,
           pageBuilder: (BuildContext context, GoRouterState routerState) {
+            _log.i(
+                'Building ${RoutesInfo.registerName}: ${routerState.report}');
             return MaterialPage(
               key: routerState.pageKey,
               child: RegisterPage(
@@ -59,11 +67,13 @@ class AppRouter {
         GoRoute(
           path: RoutesInfo.loginPath,
           name: RoutesInfo.loginName,
-          pageBuilder: (BuildContext context, GoRouterState routerState) =>
-              MaterialPage(
-            key: routerState.pageKey,
-            child: const LoginPage(),
-          ),
+          pageBuilder: (BuildContext context, GoRouterState routerState) {
+            _log.i('Building ${RoutesInfo.loginName}: ${routerState.report}');
+            return MaterialPage(
+              key: routerState.pageKey,
+              child: const LoginPage(),
+            );
+          },
         ),
 
         /// The main page -> Home Page with bottom Navbar
@@ -72,6 +82,7 @@ class AppRouter {
             name: RoutesInfo.homeName,
             pageBuilder: (BuildContext context, GoRouterState routerState) {
               _extractHomeTabName(routerState, context);
+              _log.i('Building ${RoutesInfo.homeName}: ${routerState.report}');
               return MaterialPage(
                   key: routerState.pageKey, child: const HomePage());
             },
@@ -82,6 +93,8 @@ class AppRouter {
                   pageBuilder:
                       (BuildContext context, GoRouterState routerState) {
                     _extractHomeTabName(routerState, context);
+                    _log.i(
+                        'Building ${RoutesInfo.newNoteName}: ${routerState.report}');
                     return MaterialPage(
                       key: routerState.pageKey,
                       child: CreateNotePage(
@@ -96,8 +109,9 @@ class AppRouter {
             ]),
       ],
       errorBuilder: (BuildContext context, GoRouterState routerState) {
-        debugPrint('Router Error: ${routerState.error}');
-        debugPrint('Router Error: ${routerState.toString()}');
+        _log.e('Router Error: ${routerState.error}\n'
+            'Router Error: ${routerState.toString()}');
+
         return const ErrorPage();
       });
 
@@ -130,5 +144,13 @@ class AppRouter {
     final String tabName = routerState.params['tab']!;
     BlocProvider.of<HomeTabsBloc>(context)
         .add(ChangeHomeTabs(tabFromName(tabName)));
+  }
+}
+
+extension on GoRouterState {
+  String? get report {
+    return 'name: $name, params: $params, queryParams: $queryParams, '
+        'extra: $extra, subloc: $subloc, location: $location, path: $path '
+        'fullPath: $fullpath, error: $error.';
   }
 }

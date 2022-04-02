@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:shinchoku/core/constants/images.dart';
 import 'package:shinchoku/core/widgets/form_container.dart';
 import 'package:shinchoku/core/widgets/shi_image.dart';
@@ -40,15 +41,16 @@ class AuthPagesBlueprint extends StatelessWidget {
             ),
           ),
         ),
-        SingleChildScrollView(
-          child: SizedBox(
-            height: MediaQuery.of(context).size.height,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.end,
-              mainAxisSize: MainAxisSize.max,
-              children: [
-                FormContainer(child: form)
-              ],
+        Align(
+          alignment: kIsWeb ? Alignment.centerRight : Alignment.center,
+          child: SingleChildScrollView(
+            child: SizedBox(
+              height: MediaQuery.of(context).size.height,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                mainAxisSize: MainAxisSize.max,
+                children: [FormContainer(child: form)],
+              ),
             ),
           ),
         )
