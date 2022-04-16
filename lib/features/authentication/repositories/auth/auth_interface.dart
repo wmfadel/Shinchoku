@@ -14,4 +14,6 @@ abstract class IAuth {
   Future<AppUser?> loginWithGithub();
 
   Future<AppUser?> loginWithFacebook();
+
+  Future<void> logout();
 }

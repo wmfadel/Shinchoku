@@ -86,4 +86,9 @@ class FireAuth implements IAuth {
     // TODO: implement loginWithFacebook
     throw UnimplementedError();
   }
+
+  @override
+  Future<void> logout()async {
+   await FirebaseAuth.instance.signOut();
+  }
 }

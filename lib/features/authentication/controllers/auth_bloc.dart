@@ -39,7 +39,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         emit(AuthLoading());
         _appUser = await autService.createNewUser(
             email: event.email, password: event.password, name: event.name);
-        emit(AuthCompleted(_appUser?.name??''));
+        emit(AuthCompleted(_appUser?.name ?? ''));
       } on AppError catch (e) {
         emit(AuthError(e.message));
       } on Exception catch (_) {
@@ -52,7 +52,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       try {
         _appUser = await autService.loginWithGoogle();
         if (_appUser == null) emit(AuthError('Cannot Continue with Google'));
-        emit(AuthCompleted(_appUser?.name??''));
+        emit(AuthCompleted(_appUser?.name ?? ''));
       } on AppError catch (e) {
         emit(AuthError(e.message));
       } on Exception catch (_) {
@@ -65,7 +65,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         emit(AuthLoading());
         _appUser = await autService.loginWithTwitter();
         if (_appUser == null) emit(AuthError('Cannot Continue with Twitter'));
-        emit(AuthCompleted(_appUser?.name??''));
+        emit(AuthCompleted(_appUser?.name ?? ''));
       } on AppError catch (e) {
         emit(AuthError(e.message));
       } on Exception catch (_) {
@@ -78,7 +78,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         emit(AuthLoading());
         _appUser = await autService.loginWithUser(
             email: _appUser!.email!, password: event.password);
-        emit(AuthCompleted(_appUser?.name??''));
+        emit(AuthCompleted(_appUser?.name ?? ''));
       } on AppError catch (e) {
         emit(AuthError(e.message));
       } on Exception catch (_) {
@@ -97,8 +97,20 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           emit(AuthLoading());
           _appUser = await autService
               .getUSerById(FirebaseAuth.instance.currentUser!.uid);
-          emit(AuthCompleted(_appUser?.name??''));
+          emit(AuthCompleted(_appUser?.name ?? ''));
         }
+      } on AppError catch (e) {
+        emit(AuthError(e.message));
+      } on Exception catch (_) {
+        emit(AuthError(Strings.defaultErrorMessage));
+      }
+    });
+    on<LogoutUser>((event, emit) async {
+      emit(AuthLoading());
+      try {
+        await autService.logout();
+        _appUser = null;
+        emit(AuthUserLoggedOut());
       } on AppError catch (e) {
         emit(AuthError(e.message));
       } on Exception catch (_) {

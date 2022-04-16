@@ -9,6 +9,7 @@ class AuthLoading extends AuthState {}
 
 class AuthCompleted extends AuthState {
   final String userName;
+
   AuthCompleted(this.userName);
 }
 
@@ -37,3 +38,5 @@ class AuthError extends AuthState {
     Logger().i('AuthError state with message "$message"');
   }
 }
+
+class AuthUserLoggedOut extends AuthState {}

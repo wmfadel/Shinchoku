@@ -101,4 +101,8 @@ class AuthenticationService {
       throw const ServerException('Cannot Check this user on Server');
     }
   }
+
+  Future<void> logout()async{
+   await _authRepository.logout();
+  }
 }
