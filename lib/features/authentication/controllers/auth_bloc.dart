@@ -1,3 +1,4 @@
+import 'package:equatable/equatable.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -90,14 +91,18 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       emit(AuthEditingName(event.name));
     });
 
-    /// Get [AppUser] object from [FirebaseAuth] `currentUser`
+    /// Get [AppUser] object from [FirebaseAuth] `currentUser` if not already
+    /// logged in
     on<GetUser>((event, emit) async {
       try {
+        if (_appUser != null) return emit(AuthCompleted(_appUser?.name ?? ''));
         if (FirebaseAuth.instance.currentUser != null) {
           emit(AuthLoading());
           _appUser = await autService
               .getUSerById(FirebaseAuth.instance.currentUser!.uid);
           emit(AuthCompleted(_appUser?.name ?? ''));
+        }else{
+          emit(AuthError(''));
         }
       } on AppError catch (e) {
         emit(AuthError(e.message));
@@ -122,4 +127,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   AppUser? _appUser;
 
   AppUser? get appUser => _appUser;
+
+  bool get isAuthComplete =>
+      _appUser != null && FirebaseAuth.instance.currentUser != null;
 }

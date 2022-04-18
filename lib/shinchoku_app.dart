@@ -7,23 +7,30 @@ import 'package:shinchoku/features/home/controllers/home_tabs_bloc.dart';
 import 'package:shinchoku/router/app_router.dart';
 
 class ShinchokuApp extends StatelessWidget {
-  const ShinchokuApp({Key? key}) : super(key: key);
+  ShinchokuApp({Key? key}) : super(key: key) {
+    _authBloc = AuthBloc(AuthenticationService());
+    appRouter  = AppRouter(_authBloc);
+  }
+
+
+ late final AuthBloc _authBloc;
+ late final AppRouter appRouter ;
 
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
-        providers: [
-          BlocProvider(create: (_) => HomeTabsBloc()),
-          BlocProvider(
-            create: (_) => AuthBloc(AuthenticationService()),
-          ),
-        ],
-        child: MaterialApp.router(
-          title: 'Shinchoku',
-          debugShowCheckedModeBanner: false,
-          theme: AppTheme.light,
-          routeInformationParser: AppRouter.router.routeInformationParser,
-          routerDelegate: AppRouter.router.routerDelegate,
-        ));
+      providers: [
+        BlocProvider(create: (_) => HomeTabsBloc()),
+        BlocProvider.value(value: _authBloc),
+      ],
+      child:MaterialApp.router(
+        key: const ValueKey('__material_app_key__'),
+        title: 'Shinchoku',
+        debugShowCheckedModeBanner: false,
+        theme: AppTheme.light,
+        routeInformationParser: appRouter.router.routeInformationParser,
+        routerDelegate: appRouter.router.routerDelegate,
+      ),
+    );
   }
 }

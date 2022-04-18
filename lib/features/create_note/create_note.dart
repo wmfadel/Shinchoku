@@ -1,5 +1,6 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shinchoku/features/authentication/controllers/auth_bloc.dart';
 
 /// Page used for creating/editing tasks, it decides if it's going to edit or
 /// create new task depending on if a `taskId` value is provided.
@@ -20,7 +21,8 @@ class CreateNotePage extends StatelessWidget {
       body: Center(
         child: TextButton(
           onPressed: (){
-            FirebaseAuth.instance.signOut();
+          BlocProvider.of(context);
+          context.read<AuthBloc>().add(LogoutUser());
           },
           child: const Text('LOGOUT'),
         ),

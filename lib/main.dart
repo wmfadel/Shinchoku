@@ -1,19 +1,30 @@
 import 'dart:async';
 import 'dart:isolate';
-
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 import 'package:shinchoku/shinchoku_app.dart';
 
 void main() async {
-  runZonedGuarded<Future<void>>(() async {
-    WidgetsFlutterBinding.ensureInitialized();
-    await Firebase.initializeApp();
-    FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
-    runApp(const ShinchokuApp());
-    _errorListener();
-  }, (error, stack) => FirebaseCrashlytics.instance.recordError(error, stack));
+  if (kIsWeb) {
+    await bootstrap();
+  } else {
+    runZonedGuarded<Future<void>>(
+      () async {
+        await bootstrap();
+      },
+      (error, stack) => FirebaseCrashlytics.instance.recordError(error, stack),
+    );
+  }
+}
+
+bootstrap() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
+  runApp(ShinchokuApp());
+  if (!kIsWeb) _errorListener();
 }
 
 _errorListener() {
