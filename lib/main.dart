@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
+import 'package:logger/logger.dart';
 import 'package:shinchoku/shinchoku_app.dart';
 
 void main() async {
@@ -20,10 +21,11 @@ void main() async {
 }
 
 bootstrap() async {
+  Logger().wtf('bootstrap');
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
-  runApp(ShinchokuApp());
+  runApp(ShinchokuApp(key:const ValueKey('__app_key__'),));
   if (!kIsWeb) _errorListener();
 }
 

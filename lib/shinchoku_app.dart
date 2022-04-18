@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:logger/logger.dart';
 import 'package:shinchoku/core/theme/app_theme.dart';
 import 'package:shinchoku/features/authentication/controllers/auth_bloc.dart';
 import 'package:shinchoku/features/authentication/services/authentication_service.dart';
@@ -10,6 +11,7 @@ class ShinchokuApp extends StatelessWidget {
   ShinchokuApp({Key? key}) : super(key: key) {
     _authBloc = AuthBloc(AuthenticationService());
     appRouter  = AppRouter(_authBloc);
+    Logger().wtf('main constructor');
   }
 
 
@@ -18,6 +20,7 @@ class ShinchokuApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Logger().wtf('main build');
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (_) => HomeTabsBloc()),
