@@ -24,35 +24,39 @@ class HomePage extends StatelessWidget {
           CollaborationPage(),
         ],
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
-      floatingActionButton: FloatingActionButton(
-        onPressed: () => context.goNamed(
-          RoutesInfo.newNoteName,
-          params: {'tab': homeTabsBloc.homeTabs.name},
-        ),
-        child: const Icon(Icons.add_outlined),
-      ),
       bottomNavigationBar: NavigationBar(
         labelBehavior: NavigationDestinationLabelBehavior.alwaysHide,
         animationDuration: const Duration(seconds: 1),
         onDestinationSelected: (selectedIndex) {
+          /// return if clicked on the FAB
+          if(selectedIndex >= HomeTab.values.length)return;
           context.goNamed(RoutesInfo.homeName,
               params: {'tab': HomeTab.values[selectedIndex].name});
         },
         selectedIndex: homeTabsBloc.homeTabs.index,
         backgroundColor: Colors.white,
         height: 72,
-        destinations: const [
-          NavigationDestination(
+        destinations: [
+          const NavigationDestination(
             icon: Icon(Icons.calendar_today_outlined),
             label: 'Home',
           ),
-          NavigationDestination(
+          const NavigationDestination(
             icon: Icon(Icons.dashboard_outlined),
             label: 'Dashboard',
           ),
+          const NavigationDestination(
+            icon: Icon(Icons.people_alt),
+            label: 'Dashboard',
+          ),
           NavigationDestination(
-            icon: Icon(Icons.people_alt_outlined),
+            icon: FloatingActionButton(
+              onPressed: () => context.goNamed(
+                RoutesInfo.newNoteName,
+                params: {'tab': homeTabsBloc.homeTabs.name},
+              ),
+              child: const Icon(Icons.add_outlined),
+            ),
             label: 'Collaboration',
           ),
         ],
