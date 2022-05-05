@@ -14,7 +14,6 @@ class Images {
   static const String authFacebook = 'assets/pics/facebook.svg';
   static const String authGithub = 'assets/pics/github.svg';
 
-
   /// Dialogs Images
   static const String dialogBubble = 'assets/pics/dialogs/message_bubble.svg';
   static const String dialogInfo = 'assets/pics/dialogs/info_head.svg';
@@ -22,7 +21,9 @@ class Images {
   static const String dialogSuccess = 'assets/pics/dialogs/success_head.svg';
   static const String dialogWarning = 'assets/pics/dialogs/warning_head.svg';
 
-
   static int get _randomSimzImage =>
       Random(DateTime.now().microsecondsSinceEpoch).nextInt(18);
+
+  static String randomUserImage =
+      'https://avatars.dicebear.com/api/avataaars/${DateTime.now().millisecondsSinceEpoch}.svg';
 }
