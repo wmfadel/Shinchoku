@@ -25,6 +25,8 @@ class AppRouter {
   }
 
   static final Logger _log = Logger('AppRouter');
+  static final GlobalKey<ScaffoldMessengerState> scaffoldMessengerKey =
+      GlobalKey();
 
   GoRouter _buildRouter() {
     return GoRouter(

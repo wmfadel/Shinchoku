@@ -2,18 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:shinchoku/core/constants/images.dart';
 import 'package:shinchoku/core/enums/dialogs_enum.dart';
 import 'package:shinchoku/core/widgets/shi_image.dart';
+import 'package:shinchoku/router/app_router.dart';
 
 extension Dialogs on BuildContext {
   showShiDialog({required DialogType type, required String message}) {
-    showDialog(
-        context: this,
-        builder: (context) {
-          return ShiDialog(type: type, message: message);
-        });
+    AppRouter.scaffoldMessengerKey.currentState?.clearSnackBars();
+    AppRouter.scaffoldMessengerKey.currentState?.showSnackBar(SnackBar(
+      clipBehavior: Clip.none,
+      backgroundColor: Colors.transparent,
+      elevation: 0,
+      padding: const EdgeInsets.fromLTRB(8, 0, 8, 16),
+      content: ShiDialog(type: type, message: message),
+      duration: const Duration(seconds: 3),
+    ));
   }
 }
 
-class ShiDialog extends StatelessWidget {
+class ShiDialog extends StatefulWidget {
   final DialogType type;
   final String message;
 
@@ -24,13 +29,33 @@ class ShiDialog extends StatelessWidget {
   }) : super(key: key);
 
   @override
+  State<ShiDialog> createState() => _ShiDialogState();
+}
+
+class _ShiDialogState extends State<ShiDialog> with SingleTickerProviderStateMixin{
+
+  late final AnimationController controller;
+  late final Animation<double> scaleAnimation;
+
+  @override
+  void initState() {
+    controller = AnimationController(vsync: this,duration:const Duration(milliseconds: 500));
+    scaleAnimation = Tween<double>(begin:0.4,end:1).animate(controller);
+    controller.forward();
+    super.initState();
+  }
+
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Dialog(
-      backgroundColor: Colors.transparent,
-      shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(32))),
-      insetPadding: const EdgeInsets.only(left: 8, right: 8, top: 32),
-      alignment: Alignment.topCenter,
+    return ScaleTransition(
+      scale: scaleAnimation,
       child: Stack(
         clipBehavior: Clip.none,
         children: [
@@ -40,7 +65,7 @@ class ShiDialog extends StatelessWidget {
             constraints: const BoxConstraints(minHeight: 110),
             width: double.infinity,
             decoration: BoxDecoration(
-              color: type.color,
+              color: widget.type.color,
               borderRadius: const BorderRadius.all(Radius.circular(32)),
             ),
             child: Row(
@@ -54,7 +79,7 @@ class ShiDialog extends StatelessWidget {
                     children: [
                       const SizedBox(height: 8),
                       Text(
-                        type.message,
+                        widget.type.message,
                         style: Theme.of(context)
                             .textTheme
                             .headline3!
@@ -63,7 +88,7 @@ class ShiDialog extends StatelessWidget {
                       const SizedBox(height: 5),
                       Flexible(
                         child: Text(
-                          message,
+                          widget.message,
                           style: Theme.of(context)
                               .textTheme
                               .overline!
@@ -91,7 +116,7 @@ class ShiDialog extends StatelessWidget {
               ),
               child: ShiImage(
                 Images.dialogBubble,
-                color: type.bubbleColor,
+                color: widget.type.bubbleColor,
                 width: 64,
                 height: 64,
               ),
@@ -100,7 +125,7 @@ class ShiDialog extends StatelessWidget {
           Positioned(
             top: -28,
             left: 22,
-            child: ShiImage(type.image, width: 58, height: 58),
+            child: ShiImage(widget.type.image, width: 58, height: 58),
           ),
         ],
       ),
