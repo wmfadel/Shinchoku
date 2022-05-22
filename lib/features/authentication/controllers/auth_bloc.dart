@@ -2,7 +2,7 @@ import 'package:equatable/equatable.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:logger/logger.dart';
+import 'package:logging/logging.dart';
 import 'package:shinchoku/core/constants/strings.dart';
 import 'package:shinchoku/core/errors/app_error.dart';
 

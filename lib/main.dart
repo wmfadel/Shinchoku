@@ -1,13 +1,23 @@
 import 'dart:async';
 import 'dart:isolate';
-import 'package:flutter/foundation.dart' show kIsWeb;
+import 'package:flutter/foundation.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
-import 'package:logger/logger.dart';
 import 'package:shinchoku/shinchoku_app.dart';
+import 'package:logging/logging.dart';
 
 void main() async {
+  if (kReleaseMode) {
+    // Don't log anything below warnings in production.
+    Logger.root.level = Level.ALL;
+  }
+  Logger.root.onRecord.listen((record) {
+    debugPrint('${record.level.name}: ${record.time}: '
+        '${record.loggerName}: '
+        '${record.message}');
+  });
+
   if (kIsWeb) {
     await bootstrap();
   } else {
@@ -20,8 +30,11 @@ void main() async {
   }
 }
 
+Logger _log = Logger('main.dart');
+
+
 bootstrap() async {
-  Logger().wtf('bootstrap');
+  _log.finer('bootstrap');
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;

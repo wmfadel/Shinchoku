@@ -54,7 +54,8 @@ class AuthError extends AuthState {
   final String message;
 
   AuthError(this.message) {
-    Logger().i('AuthError state with message "$message"');
+    Logger('AuthenticationService')
+        .shout('AuthError state with message "$message"');
   }
 
   @override

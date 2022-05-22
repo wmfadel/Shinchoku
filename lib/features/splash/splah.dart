@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:logger/logger.dart';
+import 'package:logging/logging.dart';
 import 'package:shinchoku/core/constants/images.dart';
 import 'package:shinchoku/core/widgets/button_loading.dart';
 import 'package:shinchoku/core/widgets/shi_image.dart';
@@ -13,6 +13,7 @@ class SplashPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final Logger _log = Logger('SplashPage');
     AuthBloc.get(context).add(GetUser());
     return Scaffold(
       body: BlocConsumer<AuthBloc, AuthState>(
@@ -20,7 +21,7 @@ class SplashPage extends StatelessWidget {
         buildWhen: (_, __) => false,
         listener: (context, state) {
           if (state is AuthCompleted) {
-            Logger().v('From splash');
+            _log.fine('From splash');
             context.go(RoutesInfo.homeInitialPath);
           } else if (state is AuthError) {
             context.go(RoutesInfo.authPath);

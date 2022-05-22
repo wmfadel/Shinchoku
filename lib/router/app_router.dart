@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:logger/logger.dart';
+import 'package:logging/logging.dart';
 import 'package:shinchoku/core/pages/error_page.dart';
 import 'package:shinchoku/features/authentication/controllers/auth_bloc.dart';
 import 'package:shinchoku/features/authentication/pages/authentication.dart';
@@ -20,11 +20,11 @@ class AppRouter {
   late final GoRouter router;
 
   AppRouter(this.authBloc) {
-    _log.wtf('router constructor');
+    _log.finer('router constructor');
     router = _buildRouter();
   }
 
-  static final Logger _log = Logger();
+  static final Logger _log = Logger('AppRouter');
 
   GoRouter _buildRouter() {
     return GoRouter(
@@ -111,7 +111,7 @@ class AppRouter {
               ]),
         ],
         errorBuilder: (BuildContext context, GoRouterState routerState) {
-          _log.e('Router Error: ${routerState.error}\n'
+          _log.shout('Router Error: ${routerState.error}\n'
               'Router Error: ${routerState.toString()}');
 
           return const ErrorPage();
@@ -137,7 +137,7 @@ class AppRouter {
 
     /// If User in Auth Page and he has already logged in, Redirect to Home
     if (authBloc.isAuthComplete && _isInAuthFlow(routerState.location)) {
-      _log.v('Home from redirect');
+      _log.info('Home from redirect');
       return RoutesInfo.homeInitialPath;
     }
     return null;
@@ -155,10 +155,10 @@ class AppRouter {
   }
 }
 
-extension on GoRouterState {
-  String? get report {
-    return 'name: $name, params: $params, queryParams: $queryParams, '
-        'extra: $extra, subloc: $subloc, location: $location, path: $path '
-        'fullPath: $fullpath, error: $error.';
-  }
-}
+// extension on GoRouterState {
+//   String? get report {
+//     return 'name: $name, params: $params, queryParams: $queryParams, '
+//         'extra: $extra, subloc: $subloc, location: $location, path: $path '
+//         'fullPath: $fullpath, error: $error.';
+//   }
+// }

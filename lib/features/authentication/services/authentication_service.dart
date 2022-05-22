@@ -1,5 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:logger/logger.dart';
+import 'package:logging/logging.dart';
 import 'package:shinchoku/core/errors/app_error.dart';
 import 'package:shinchoku/features/authentication/data/app_user.dart';
 import 'package:shinchoku/features/authentication/repositories/auth/auth_interface.dart';
@@ -10,13 +10,14 @@ import 'package:shinchoku/features/authentication/repositories/user/user_interfa
 class AuthenticationService {
   final IAuth _authRepository = FireAuth();
   final IUser _userRepository = FireUser();
-  final Logger _logger = Logger();
+
+  final Logger _log = Logger('AuthenticationService');
 
   Future<AppUser?> checkUserExistsByEmail({required String email}) async {
     try {
       return await _userRepository.getUserByEmail(email);
     } on Exception catch (e) {
-      _logger.e('${e.runtimeType} : ${e.toString()}');
+      _log.severe('${e.runtimeType} : ${e.toString()}');
       throw const ServerException('Cannot Check this user on Server');
     }
   }
@@ -31,11 +32,11 @@ class AuthenticationService {
       }
       return user!;
     } on FirebaseAuthException catch (fireE) {
-      _logger.e(fireE);
+      _log.severe(fireE);
       throw ServerException(
           fireE.message ?? 'Cannot Check this user on Server');
     } on Exception catch (e) {
-      _logger.e('${e.runtimeType} : ${e.toString()}');
+      _log.severe('${e.runtimeType} : ${e.toString()}');
       throw const ServerException('Cannot Check this user on Server');
     }
   }
@@ -46,11 +47,11 @@ class AuthenticationService {
       return await _authRepository.loginWithEmailAndPassword(
           email: email, password: password);
     } on FirebaseAuthException catch (fireE) {
-      _logger.e(fireE);
+      _log.severe(fireE);
       throw ServerException(
           fireE.message ?? 'Cannot Check this user on Server');
     } on Exception catch (e) {
-      _logger.e('${e.runtimeType} : ${e.toString()}');
+      _log.severe('${e.runtimeType} : ${e.toString()}');
       throw const ServerException('Cannot Check this user on Server');
     }
   }
@@ -59,7 +60,7 @@ class AuthenticationService {
     try {
       return await _userRepository.getUserById(uid);
     } on Exception catch (e) {
-      _logger.e('${e.runtimeType} : ${e.toString()}');
+      _log.severe('${e.runtimeType} : ${e.toString()}');
       throw const ServerException('Cannot Check this user on Server');
     }
   }
@@ -72,13 +73,13 @@ class AuthenticationService {
       }
       return await _userRepository.storeUser(user);
     } on FirebaseAuthException catch (fireE) {
-      _logger.e(fireE);
+      _log.severe(fireE);
       throw ServerException(
           fireE.message ?? 'Cannot Check this user on Server');
     } on AuthenticationException catch (_) {
       rethrow;
     } on Exception catch (e) {
-      _logger.e('${e.runtimeType} : ${e.toString()}');
+      _log.severe('${e.runtimeType} : ${e.toString()}');
       throw const ServerException('Cannot Check this user on Server');
     }
   }
@@ -91,13 +92,13 @@ class AuthenticationService {
       }
       return await _userRepository.storeUser(user);
     } on FirebaseAuthException catch (fireE) {
-      _logger.e(fireE);
+      _log.severe(fireE);
       throw ServerException(
           fireE.message ?? 'Cannot Check this user on Server');
     } on AuthenticationException catch (_) {
       rethrow;
     } on Exception catch (e) {
-      _logger.e('${e.runtimeType} : ${e.toString()}');
+      _log.severe('${e.runtimeType} : ${e.toString()}');
       throw const ServerException('Cannot Check this user on Server');
     }
   }
