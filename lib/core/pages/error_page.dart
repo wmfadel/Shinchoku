@@ -39,10 +39,9 @@ class ErrorPage extends StatelessWidget {
                         context.pop();
                       } catch (_) {
                         /// if last page in stack, or cannot navigate go to home
-                        context.go(RoutesInfo.homePath);
+                        context.go(RoutesInfo.homeInitialPath);
                       }
                     },
-                    child: const Text('Back'),
                     height: 46,
                     minWidth: 120,
                     elevation: 1,
@@ -50,6 +49,7 @@ class ErrorPage extends StatelessWidget {
                     color: Theme.of(context).primaryColor,
                     shape: const RoundedRectangleBorder(
                         borderRadius: BorderRadius.all(Radius.circular(6))),
+                    child: const Text('Back'),
                   ),
                 ],
               ),

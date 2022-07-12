@@ -5,19 +5,19 @@ class RoutesInfo {
 
   /// Authentication
   static const authPath = '/auth';
-  static const authName = 'Authentication';
+  static const authName = 'authentication';
 
   /// Registration
   static const registerPath = '/auth-register';
-  static const registerName = 'Registration';
+  static const registerName = 'registration';
 
   /// Login
   static const loginPath = '/auth-login';
-  static const loginName = 'Login';
+  static const loginName = 'login';
 
   /// Splash - Initial data loading
   static const splashPath = '/';
-  static const splashName = 'Splash';
+  static const splashName = 'splash';
 
   /// '/home/:tab(${HomeTab.values.map((e) => e.name).join('|')})'
   ///
@@ -28,9 +28,9 @@ class RoutesInfo {
   static final homePath =
       '/home/:tab(${HomeTab.values.map((e) => e.name).join('|')})';
   static final homeInitialPath = '/home/${HomeTab.lists.name}';
-  static const homeName = 'Home';
+  static const homeName = 'home';
 
   /// Create Note
   static const newNotePath = 'newNote';
-  static const newNoteName = 'NewNote';
+  static const newNoteName = 'new-note';
 }

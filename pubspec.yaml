@@ -49,6 +49,7 @@ dependencies:
   geolocator: ^8.2.0
   permission_handler: ^9.2.0
   logging: ^1.0.2
+  share_plus: ^4.0.10
 
   # UI
   google_fonts: ^3.0.0
