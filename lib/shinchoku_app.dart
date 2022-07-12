@@ -33,6 +33,7 @@ class ShinchokuApp extends StatelessWidget {
         title: 'Shinchoku',
         debugShowCheckedModeBanner: false,
         theme: AppTheme.light,
+        routeInformationProvider: appRouter.router.routeInformationProvider,
         routeInformationParser: appRouter.router.routeInformationParser,
         routerDelegate: appRouter.router.routerDelegate,
         scaffoldMessengerKey: AppRouter.scaffoldMessengerKey,

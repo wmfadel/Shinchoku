@@ -11,7 +11,7 @@ import 'package:shinchoku/features/authentication/pages/register.dart';
 import 'package:shinchoku/features/create_note/create_note.dart';
 import 'package:shinchoku/features/home/controllers/home_tabs_bloc.dart';
 import 'package:shinchoku/features/home/home_page.dart';
-import 'package:shinchoku/features/splash/splah.dart';
+import 'package:shinchoku/features/splash/splash.dart';
 import 'package:shinchoku/router/home_tabs.dart';
 import 'package:shinchoku/router/routes_info.dart';
 
